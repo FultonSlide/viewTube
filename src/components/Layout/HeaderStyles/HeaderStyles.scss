@@ -1,0 +1,9 @@
+.Header {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    
+    &__logo {
+        width: 200px;
+    }
+}

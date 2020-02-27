@@ -1,0 +1,11 @@
+.Button__contents {
+  border: none;
+  background-color: #DD0426;
+  color: white;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 18px;
+  padding: 10px 12px;
+  border-radius: 50px;
+}
+/*# sourceMappingURL=ButtonStyles.css.map */

@@ -1,11 +1,14 @@
 import React from 'react';
+import Button from '../Atoms/Button';
 
 const Navbar = (props) => {
     return (
         <div className="Navbar">
-            <h1>Navbar</h1>
+            <ul className="Navbar__list">
+                <li className="Navbar__item"><Button buttonName='Watch Later'></Button></li>
+            </ul>
         </div>
-    );
+    )
 };
 
 export default Navbar;

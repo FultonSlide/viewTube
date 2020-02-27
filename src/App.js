@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import Navbar from './components/Layout/Navbar';
+import Header from './components/Layout/Header'
 import Dashboard from './components/Pages/Dashboard';
 import WatchLater from './components/Pages/WatchLater';
 import Player from './components/Pages/Player';
@@ -10,7 +10,7 @@ class App extends Component {
     return (
       <BrowserRouter>
         <div className="App">
-          <Navbar/>
+          <Header/>
           <Switch>
             <Route exact path="/" component={Dashboard}></Route>
             <Route path='/watchlater' component={WatchLater}></Route>
