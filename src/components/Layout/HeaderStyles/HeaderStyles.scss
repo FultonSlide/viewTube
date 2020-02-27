@@ -1,9 +1,16 @@
 .Header {
     display: flex;
     align-items: center;
-    padding: 15px;
+    padding: 1rem 2rem;
     
     &__logo {
+        order: 1;
         width: 200px;
+        cursor: pointer;
+    }
+
+    .Navbar {
+        order: 2;
+        margin-left: auto;
     }
 }

@@ -7,5 +7,12 @@
   font-size: 18px;
   padding: 10px 12px;
   border-radius: 50px;
+  cursor: pointer;
+  -webkit-transition: background-color 0.3s;
+  transition: background-color 0.3s;
+}
+
+.Button__contents:hover {
+  background-color: #0A4272;
 }
 /*# sourceMappingURL=ButtonStyles.css.map */

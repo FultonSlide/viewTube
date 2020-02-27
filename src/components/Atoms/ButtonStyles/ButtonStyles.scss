@@ -8,5 +8,11 @@
         font-size: 18px;
         padding: 10px 12px;
         border-radius: 50px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+
+        &:hover {
+            background-color: #0A4272;
+        }
     }
 }
