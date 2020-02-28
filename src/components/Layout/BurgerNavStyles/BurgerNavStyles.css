@@ -10,6 +10,10 @@
   width: 15px;
   background-color: black;
   border-radius: 75px;
+  -webkit-transform: rotate(0deg);
+          transform: rotate(0deg);
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
 }
 
 .BurgerNav__icon {
@@ -19,6 +23,10 @@
   width: 30px;
   background-color: black;
   border-radius: 75px;
+  -webkit-transform: rotate(0deg) translateY(0px);
+          transform: rotate(0deg) translateY(0px);
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
 }
 
 .BurgerNav:after {
@@ -26,9 +34,26 @@
   display: block;
   height: 5px;
   width: 15px;
-  -webkit-transform: translateX(15px);
-          transform: translateX(15px);
+  -webkit-transform: translateX(15px) rotate(0deg);
+          transform: translateX(15px) rotate(0deg);
   background-color: black;
   border-radius: 75px;
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
+}
+
+.BurgerNav--active:before {
+  -webkit-transform: rotate(45deg) translate(5px, 3.5px);
+          transform: rotate(45deg) translate(5px, 3.5px);
+}
+
+.BurgerNav--active__icon {
+  -webkit-transform: rotate(-45deg) translate(-1px);
+          transform: rotate(-45deg) translate(-1px);
+}
+
+.BurgerNav--active:after {
+  -webkit-transform: translateX(15px) rotate(45deg) translate(-5px);
+          transform: translateX(15px) rotate(45deg) translate(-5px);
 }
 /*# sourceMappingURL=BurgerNavStyles.css.map */

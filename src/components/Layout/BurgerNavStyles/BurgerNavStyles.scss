@@ -1,7 +1,7 @@
 .BurgerNav {
     padding: 1.8rem 1.3rem;
     cursor: pointer;
-    
+
     &:before {
         content: '';
         display: block;
@@ -9,6 +9,8 @@
         width: 15px;
         background-color: black;
         border-radius: 75px;
+        transform: rotate(0deg);
+        transition: all 0.5s;
     }
 
     &__icon {
@@ -18,6 +20,8 @@
         width: 30px;
         background-color: black;
         border-radius: 75px;
+        transform: rotate(0deg) translateY(0px);
+        transition: all 0.5s;
     }
 
     &:after {
@@ -25,8 +29,23 @@
         display: block;
         height: 5px;
         width: 15px;
-        transform: translateX(15px);
+        transform: translateX(15px) rotate(0deg);
         background-color: black;
         border-radius: 75px;
+        transition: all 0.5s;
+    }
+
+    &--active {
+        &:before {
+            transform: rotate(45deg) translate(5px, 3.5px);
+        }
+
+        &__icon {
+            transform: rotate(-45deg) translate(-1px);
+        }
+
+        &:after {
+            transform: translateX(15px) rotate(45deg) translate(-5px);
+        }
     }
 }
