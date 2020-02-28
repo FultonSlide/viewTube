@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AACK,AAAD,cAAQ,CAAC;EACL,OAAO,EAAE,SAAS;CAIrB;;AALA,AAEG,cAFI,CAEJ,EAAE,CAAC;EACC,SAAS,EAAE,IAAI;CAClB",
+    "sources": [
+        "PlayerStyles.scss"
+    ],
+    "names": [],
+    "file": "PlayerStyles.css"
+}

@@ -1,0 +1,46 @@
+.SearchBar {
+    padding-top: 17px;
+    &__input {
+        padding: 13px 15px;
+        padding-right: 15vw;
+        border: none;
+        background-color: #F0F0F0;
+        border-radius: 50px;
+    }
+
+    input::placeholder {
+        font-family: 'Montserrat', sans-serif;
+    }
+
+    .Button {
+        display: inline-block;
+        &__contents{
+            font-size: 13px;
+            svg {
+                height: 17px;
+                width: 17px;
+                path {
+                    fill: white;
+                }
+            }
+        }
+    }
+
+    @media (max-width: 900px){
+        &__input {
+            padding: 20px 23px;
+            padding-right: 30vw;
+        }
+
+        .Button {
+            transform: translateY(3px);
+            &__contents {
+                font-size: 20px;
+                svg {
+                    height: 22px;
+                    width: 22px;
+                }
+            }
+        }
+    }
+}

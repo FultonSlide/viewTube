@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,UAAU,CAAC;EACP,KAAK,EAAE,KAAK;EACZ,MAAM,EAAE,KAAK;EACb,MAAM,EAAE,IAAI;EACZ,OAAO,EAAE,IAAI;EACb,UAAU,EAAE,GAAG,CAAC,GAAG,CAAC,GAAG,CAAC,mBAAmB;EAC3C,aAAa,EAAE,IAAI;CACtB",
+    "sources": [
+        "VideoCardStyles.scss"
+    ],
+    "names": [],
+    "file": "VideoCardStyles.css"
+}

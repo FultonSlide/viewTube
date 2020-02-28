@@ -1,0 +1,32 @@
+.BurgerNav {
+    padding: 1.8rem 1.3rem;
+    cursor: pointer;
+    
+    &:before {
+        content: '';
+        display: block;
+        height: 5px;
+        width: 15px;
+        background-color: black;
+        border-radius: 75px;
+    }
+
+    &__icon {
+        display: block;
+        margin: 5px 0;
+        height: 5px;
+        width: 30px;
+        background-color: black;
+        border-radius: 75px;
+    }
+
+    &:after {
+        content: '';
+        display: block;
+        height: 5px;
+        width: 15px;
+        transform: translateX(15px);
+        background-color: black;
+        border-radius: 75px;
+    }
+}

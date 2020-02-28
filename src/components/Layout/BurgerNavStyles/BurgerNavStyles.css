@@ -1,0 +1,34 @@
+.BurgerNav {
+  padding: 1.8rem 1.3rem;
+  cursor: pointer;
+}
+
+.BurgerNav:before {
+  content: '';
+  display: block;
+  height: 5px;
+  width: 15px;
+  background-color: black;
+  border-radius: 75px;
+}
+
+.BurgerNav__icon {
+  display: block;
+  margin: 5px 0;
+  height: 5px;
+  width: 30px;
+  background-color: black;
+  border-radius: 75px;
+}
+
+.BurgerNav:after {
+  content: '';
+  display: block;
+  height: 5px;
+  width: 15px;
+  -webkit-transform: translateX(15px);
+          transform: translateX(15px);
+  background-color: black;
+  border-radius: 75px;
+}
+/*# sourceMappingURL=BurgerNavStyles.css.map */

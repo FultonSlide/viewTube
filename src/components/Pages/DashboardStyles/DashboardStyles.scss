@@ -1,0 +1,21 @@
+.Dashboard {
+    &__search-options {
+        display: flex;
+        justify-content: space-between;
+        padding: 1rem 6rem; 
+
+        h1 {
+            font-size: 24px;
+        }
+    }
+
+    @media (max-width: 900px){
+        &__search-options {
+            padding: 1.5rem;
+
+            h1 {
+                font-size: 20px;
+            }
+        }
+    }
+}

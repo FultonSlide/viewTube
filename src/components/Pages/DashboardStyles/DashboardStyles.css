@@ -1,0 +1,23 @@
+.Dashboard__search-options {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding: 1rem 6rem;
+}
+
+.Dashboard__search-options h1 {
+  font-size: 24px;
+}
+
+@media (max-width: 900px) {
+  .Dashboard__search-options {
+    padding: 1.5rem;
+  }
+  .Dashboard__search-options h1 {
+    font-size: 20px;
+  }
+}
+/*# sourceMappingURL=DashboardStyles.css.map */

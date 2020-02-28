@@ -1,16 +1,24 @@
 .Header {
     display: flex;
-    align-items: center;
-    padding: 1rem 2rem;
-    
+    justify-content: space-between;
+    padding: 0 2rem;
+
     &__logo {
-        order: 1;
+        margin: 1.2rem 0;
         width: 200px;
-        cursor: pointer;
+    }
+
+    .SearchBar {
+        display: inline-block;
     }
 
     .Navbar {
-        order: 2;
-        margin-left: auto;
+        &__list {
+            display: inline-block;
+        }
+    }
+
+    @media (max-width: 900px){
+        display: none;
     }
 }
