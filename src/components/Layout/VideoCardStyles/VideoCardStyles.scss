@@ -1,8 +1,74 @@
 .VideoCard {
-    width: 23rem;
-    height: 23rem;
+    width: 412px;
+    height: auto;
     margin: 1rem;
-    padding: 2rem;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 25px;
+    color: black;
+
+    &__content {
+        padding: 0 20px;
+        padding-bottom: 20px;
+        display: grid;
+        grid-template-columns: repeat(3, auto);
+        grid-template-rows: repeat(3, auto);
+    }
+
+    &__thumbnail {
+        height: 310px;
+        width: 412px;
+        border-top-left-radius: 25px;
+        border-top-right-radius: 25px;
+    }
+
+    &__cardTitle {
+        grid-column-start: 1;
+        grid-column-end: 4;
+        grid-row-start: 1;
+        grid-row-end: 2;
+        margin: 0.6rem 0;
+        font-size: 20px;
+    }
+
+    &__desc {
+        grid-column-start: 1;
+        grid-column-end: 4;
+        grid-row-start: 2;
+        grid-row-end: 3;
+        margin: 0.6rem 0;
+        font-size: 14px;
+    }
+
+    &__channelTitle {
+        grid-column-start: 1;
+        grid-column-end: 2;
+        grid-row-start: 3;
+        grid-row-end: 4;
+        display: block;
+        margin: 0.5rem 0;
+        font-size: 14px;
+        font-weight: bold;
+    }
+
+    &__publishedAt {
+        grid-column-start: 2;
+        grid-column-end: 3;
+        grid-row-start: 3;
+        grid-row-end: 4;
+        display: block;
+        margin: 0.5rem auto;
+        font-size: 14px;
+        font-weight: bold;
+    }
+
+    &__add {
+        grid-column-start: 3;
+        grid-column-end: 4;
+        grid-row-start: 3;
+        grid-row-end: 4;
+        width: 30px;
+        height: 30px;
+        margin: 0;
+        margin-left: auto;
+    }
 }

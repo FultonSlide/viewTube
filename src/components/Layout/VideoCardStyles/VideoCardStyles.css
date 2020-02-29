@@ -1,10 +1,89 @@
 .VideoCard {
-  width: 23rem;
-  height: 23rem;
+  width: 412px;
+  height: auto;
   margin: 1rem;
-  padding: 2rem;
   -webkit-box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
           box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 25px;
+  color: black;
+}
+
+.VideoCard__content {
+  padding: 0 20px;
+  padding-bottom: 20px;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (auto)[3];
+      grid-template-columns: repeat(3, auto);
+  -ms-grid-rows: (auto)[3];
+      grid-template-rows: repeat(3, auto);
+}
+
+.VideoCard__thumbnail {
+  height: 310px;
+  width: 412px;
+  border-top-left-radius: 25px;
+  border-top-right-radius: 25px;
+}
+
+.VideoCard__cardTitle {
+  -ms-grid-column: 1;
+      grid-column-start: 1;
+  grid-column-end: 4;
+  -ms-grid-row: 1;
+      grid-row-start: 1;
+  grid-row-end: 2;
+  margin: 0.6rem 0;
+  font-size: 20px;
+}
+
+.VideoCard__desc {
+  -ms-grid-column: 1;
+      grid-column-start: 1;
+  grid-column-end: 4;
+  -ms-grid-row: 2;
+      grid-row-start: 2;
+  grid-row-end: 3;
+  margin: 0.6rem 0;
+  font-size: 14px;
+}
+
+.VideoCard__channelTitle {
+  -ms-grid-column: 1;
+      grid-column-start: 1;
+  grid-column-end: 2;
+  -ms-grid-row: 3;
+      grid-row-start: 3;
+  grid-row-end: 4;
+  display: block;
+  margin: 0.5rem 0;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.VideoCard__publishedAt {
+  -ms-grid-column: 2;
+      grid-column-start: 2;
+  grid-column-end: 3;
+  -ms-grid-row: 3;
+      grid-row-start: 3;
+  grid-row-end: 4;
+  display: block;
+  margin: 0.5rem auto;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.VideoCard__add {
+  -ms-grid-column: 3;
+      grid-column-start: 3;
+  grid-column-end: 4;
+  -ms-grid-row: 3;
+      grid-row-start: 3;
+  grid-row-end: 4;
+  width: 30px;
+  height: 30px;
+  margin: 0;
+  margin-left: auto;
 }
 /*# sourceMappingURL=VideoCardStyles.css.map */

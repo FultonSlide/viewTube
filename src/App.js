@@ -16,7 +16,7 @@ class App extends Component {
           <Switch>
             <Route exact path="/" component={Dashboard}></Route>
             <Route path='/watchlater' component={WatchLater}></Route>
-            <Route path='/player' component={Player}></Route>
+            <Route path='/player/:id' component={Player}></Route>
           </Switch>
         </div>
       </BrowserRouter>
