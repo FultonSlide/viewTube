@@ -10,11 +10,29 @@
 }
 
 @media (max-width: 900px) {
-  .SearchOptions__item {
-    font-size: 20px;
+  .SearchOptions {
+    margin: 0 auto;
   }
-  .SearchOptions__item:nth-child(3) {
-    margin-right: 0;
+  .SearchOptions ul {
+    padding: 0;
+  }
+  .SearchOptions__item {
+    margin: 0 5px;
+    font-size: 24px;
+    border: 2px solid #0A4272;
+    background-color: white;
+    color: #0A4272;
+    font-weight: 600;
+    padding: 5px 12px;
+    border-radius: 50px;
+    cursor: pointer;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+  }
+  .SearchOptions__item:hover {
+    background-color: #DD0426;
+    color: white;
+    border: 2px solid #DD0426;
   }
 }
 /*# sourceMappingURL=SearchOptionsStyles.css.map */

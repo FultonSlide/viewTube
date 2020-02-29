@@ -3,22 +3,25 @@ import VideoCardList from '../Layout/VideoCardList';
 import SearchOptions from '../Atoms/SearchOptions';
 import './DashboardStyles/DashboardStyles.css';
 
+//Old key, quota reached: AIzaSyAqSKoR84MGTlCJ_-YtywCQEucYj-747L4
+//Key 2: AIzaSyCnF4i9AoHmwEcLFkVXq95B16mv53kT5p4
+
 class Dashboard extends Component {
     state = {
-        title: 'Top Videos',
-        apiKey: 'AIzaSyAqSKoR84MGTlCJ_-YtywCQEucYj-747L4',
+        title: '',
+        countryCode: '',
+        apiKey: 'AIzaSyCnF4i9AoHmwEcLFkVXq95B16mv53kT5p4',
         URI: 'https://www.googleapis.com/youtube/v3',
-        musicTopicID: '/m/04rlf',
-        gamingTopicID: '/m/0bzvm2',
-        sportsTopicID: '/m/0jm_',
+        musicTopicID: 'music',
+        gamingTopicID: 'gaming',
+        sportsTopicID: 'sports',
         videoData: []
     }
 
-    componentDidMount() {
-        fetch(`${this.state.URI}/search?key=${this.state.apiKey}&part=snippet&maxResults=20&topicID=${this.state.musicTopicID}`)
+    handleFetch = (id) => {
+        fetch(`${this.state.URI}/search?key=${this.state.apiKey}&part=snippet&maxResults=20&q=${id}`)
             .then(response => response.json())
             .then(data => {
-                console.log(data);
                 this.setState({
                     ...this.state,
                     videoData: data.items
@@ -27,49 +30,51 @@ class Dashboard extends Component {
             .catch(err => console.log(err));
     }
 
+    componentDidMount() {
+        fetch('https://extreme-ip-lookup.com/json/')
+                .then( res => res.json())
+                .then(response => {
+                    console.log("Country: ", response);
+                    this.setState({
+                        ...this.state,
+                        countryCode: response.countryCode
+                    });
+                    fetch(`${this.state.URI}/search?key=${this.state.apiKey}&part=snippet&chart=mostPopular&maxResults=20&regionCode=${this.state.countryCode}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            console.log(data);
+                            this.setState({
+                                ...this.state,
+                                title: 'Top Videos',
+                                videoData: data.items
+                            })
+                        })
+                        .catch(err => console.log(err));
+                })
+                .catch(err => console.log(err));
+    }
+
     handleFetchTopics = (title) => {
-        if(title == 'Music') {
-            fetch(`${this.state.URI}/search?key=${this.state.apiKey}&part=snippet&maxResults=20&topicID=${this.state.musicTopicID}`)
-            .then(response => response.json())
-            .then(data => {
-                console.log(data);
-                this.setState({
-                    ...this.state,
-                    videoData: data.items
-                })
-            })
-            .catch(err => console.log(err));
-        } else if(title == 'Gaming'){
-            fetch(`${this.state.URI}/search?key=${this.state.apiKey}&part=snippet&maxResults=20&topicID=${this.state.gamingTopicID}`)
-            .then(response => response.json())
-            .then(data => {
-                console.log(data);
-                this.setState({
-                    ...this.state,
-                    videoData: data.items
-                })
-            })
-            .catch(err => console.log(err));
-        } else if(title == 'Sports'){
-            fetch(`${this.state.URI}/search?key=${this.state.apiKey}&part=snippet&maxResults=20&topicID=${this.state.sportsTopicID}`)
-            .then(response => response.json())
-            .then(data => {
-                console.log(data);
-                this.setState({
-                    ...this.state,
-                    videoData: data.items
-                })
-            })
-            .catch(err => console.log(err));
+        if(title === 'Music') {
+            this.handleFetch(this.state.musicTopicID);
+        } else if(title === 'Gaming'){
+            this.handleFetch(this.state.gamingTopicID);
+        } else if(title === 'Sports'){
+            this.handleFetch(this.state.sportsTopicID);
         }
     }
 
     handleTitleState = (title) => {
-        if(title == 'Music' || title == 'Gaming' || title == 'Sports' || title == 'Top Videos'){
+        if(title === 'Music' || title === 'Gaming' || title === 'Sports' || title === 'Top Videos'){
             this.setState({
                 title
             });
         }
+    }
+
+    addToStorage = (id) => {
+        let savedVideoCount = localStorage.length;
+        localStorage.setItem(savedVideoCount++, id);
     }
 
     render () {
@@ -80,7 +85,7 @@ class Dashboard extends Component {
                     <SearchOptions handleTitleState={this.handleTitleState} handleFetchTopics={this.handleFetchTopics}/>
                 </div>
                 <div className="Dashboard__video-cards">
-                    <VideoCardList videoData={this.state.videoData}/>
+                    {this.state.videoData.length > 0 ? <VideoCardList videoData={this.state.videoData} addToStorage={this.addToStorage}/> : null}
                 </div>
             </div>
         )

@@ -1,8 +1,11 @@
-.Player__title {
-  padding: 1rem 6rem;
+.Player__video {
+  margin-top: 2rem;
+  text-align: center;
+  background-color: black;
 }
 
-.Player__title h1 {
-  font-size: 24px;
+.Player__video iframe {
+  width: 80vw;
+  height: 40vw;
 }
 /*# sourceMappingURL=PlayerStyles.css.map */

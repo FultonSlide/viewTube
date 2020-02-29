@@ -3,14 +3,12 @@ import { Link } from 'react-router-dom';
 import VideoCard from './VideoCard';
 import './VideoCardListStyles/VideoCardListStyles.css';
 
-const VideoCardList = ({ videoData }) => {
+const VideoCardList = (props) => {
     return (
         <div className="VideoCardList">
-            {videoData.map((video) => {
+            {props.videoData.map((video) => {
                 return (
-                    <Link to={'/player/' + video.id.videoId}>
-                        <VideoCard videoData={video} key={video.id.videoId}/>
-                    </Link>
+                    <VideoCard videoData={video} key={video.id.videoId} addToStorage={props.addToStorage}/>
                 )
             })}
         </div>

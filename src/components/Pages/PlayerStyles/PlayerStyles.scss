@@ -1,8 +1,11 @@
 .Player {
-    &__title {
-        padding: 1rem 6rem;
-        h1 {
-            font-size: 24px;
+    &__video {
+        margin-top: 2rem;
+        text-align: center;
+        background-color: black;
+        iframe {
+            width: 80vw;
+            height: 40vw;
         }
     }
 }
