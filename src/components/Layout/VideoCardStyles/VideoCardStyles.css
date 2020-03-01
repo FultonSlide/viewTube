@@ -45,6 +45,9 @@
   padding-top: 5px;
   margin: 0.6rem 0;
   font-size: 20px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .VideoCard__desc {
@@ -67,7 +70,7 @@
       grid-template-columns: repeat(3, 1fr);
   -ms-grid-rows: auto;
       grid-template-rows: auto;
-  margin: 0 20px;
+  margin: 5px 20px 10px 20px;
 }
 
 .VideoCard__channelTitle {

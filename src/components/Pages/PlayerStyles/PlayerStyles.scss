@@ -29,6 +29,27 @@
         grid-column-end: 4;
         grid-row-start: 2;
         grid-row-end: 3;
+        white-space: nowrap;  
+        overflow: hidden; 
+        text-overflow: ellipsis;
+        cursor: pointer;
+        transition: all 1s;
+        &--active {
+            white-space: normal;
+            overflow: auto;
+            text-overflow: unset;
+            transition: all 1s;
+        }
+        &:after{
+            content: '';
+            display: block;
+            margin: 0 auto;
+            margin-top: 5px;
+            height: 7px;
+            width: 30px;
+            border-radius: 50px;
+            background-color: #0A4272;
+        }
     }
 
     &__channelName {

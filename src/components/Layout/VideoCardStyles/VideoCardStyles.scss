@@ -36,6 +36,9 @@
         padding-top: 5px;
         margin: 0.6rem 0;
         font-size: 20px;
+        white-space: nowrap;  
+        overflow: hidden; 
+        text-overflow: ellipsis;
     }
 
     &__desc {
@@ -54,7 +57,7 @@
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         grid-template-rows: auto;
-        margin: 0 20px;
+        margin: 5px 20px 10px 20px;
     }
     
     &__channelTitle {

@@ -7,6 +7,7 @@ class Player extends Component {
     state = {
         dataLoaded: false,
         relatedDataLoaded: false,
+        descActive: false,
         videoDetails: [],
         relatedVideos: []
     }
@@ -57,6 +58,13 @@ class Player extends Component {
             });
     }
 
+    handleDescActive = () => {
+        this.setState({
+            ...this.state,
+            descActive: !this.state.descActive
+        })
+    }
+
     render () {
         let URL = 'https://www.youtube.com/embed/';
         let videoId = this.props.match.params.id;
@@ -67,7 +75,7 @@ class Player extends Component {
                 </div>
                 <div className="Player__details">
                     <h1 className="Player__title">{this.state.videoDetails.snippet.title}</h1>
-                    <p className="Player__desc">{this.state.videoDetails.snippet.description}</p>
+                    <p className={this.state.descActive ? "Player__desc Player__desc--active" : "Player__desc"} onClick={this.handleDescActive}>{this.state.videoDetails.snippet.description}</p>
                     <p className="Player__channelName">{this.state.videoDetails.snippet.channelTitle}</p>
                     <p className="Player__publishedAt">{ moment(this.state.videoDetails.snippet.publishedAt).fromNow() }</p>
                     <p className="Player__add"></p>

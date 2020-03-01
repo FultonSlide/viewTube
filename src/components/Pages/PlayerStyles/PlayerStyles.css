@@ -36,6 +36,31 @@
   -ms-grid-row: 2;
       grid-row-start: 2;
   grid-row-end: 3;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: pointer;
+  -webkit-transition: all 1s;
+  transition: all 1s;
+}
+
+.Player__desc--active {
+  white-space: normal;
+  overflow: auto;
+  text-overflow: unset;
+  -webkit-transition: all 1s;
+  transition: all 1s;
+}
+
+.Player__desc:after {
+  content: '';
+  display: block;
+  margin: 0 auto;
+  margin-top: 5px;
+  height: 7px;
+  width: 30px;
+  border-radius: 50px;
+  background-color: #0A4272;
 }
 
 .Player__channelName {

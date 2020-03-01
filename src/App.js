@@ -13,7 +13,7 @@ import Player from './components/Pages/Player';
 
 class App extends Component {
   state = {
-    apiKey: 'AIzaSyA1EkBEFgV4LT9-ERNZpTp7yYEVYB3eyag',
+    apiKey: 'AIzaSyC0EQvDgWmnQQbZS_E08Wkcg-E00f5hSeI',
     URI: 'https://www.googleapis.com/youtube/v3',
     title: '',
     countryCode: '',
@@ -107,6 +107,7 @@ class App extends Component {
   }
 
   handleTitleState = (title) => {
+    console.log(title);
     if(title === 'Music' || title === 'Gaming' || title === 'Sports' || title === 'Top Videos'){
       this.setState({
         title
