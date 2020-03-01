@@ -23,6 +23,7 @@
   }
   .MobileHeader__title {
     width: 225px;
+    cursor: pointer;
   }
   .MobileHeader__search {
     display: -webkit-box;

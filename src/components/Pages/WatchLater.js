@@ -6,8 +6,9 @@ class WatchLater extends Component {
     state = {
         videoIds: [],
         videoData: [],
-        apiKey: 'AIzaSyCnF4i9AoHmwEcLFkVXq95B16mv53kT5p4',
+        apiKey: 'AIzaSyC0EQvDgWmnQQbZS_E08Wkcg-E00f5hSeI',
         URI: 'https://www.googleapis.com/youtube/v3',
+        dataLoaded: false
     }
 
     getLocalStorage = () => {
@@ -17,15 +18,23 @@ class WatchLater extends Component {
     }
 
     handleFetch = (id) => {
-        fetch(`${this.state.URI}/search?part=snippet&id=${id}&key=${this.state.apiKey}`)
+        fetch(`${this.state.URI}/videos?part=snippet&id=${id}&key=${this.state.apiKey}`)
             .then(response => response.json())
             .then(data => {
+                console.log(data);
                 this.setState({
                     ...this.state,
+                    dataLoaded: true,
                     videoData: data.items
                 })
             })
-            .catch(err => console.log(err));
+            .catch(err => {
+                console.log(err);
+                this.setState({
+                    ...this.state,
+                    dataLoaded: false
+                });
+            });
     }
 
     componentDidMount() {
@@ -41,8 +50,7 @@ class WatchLater extends Component {
     }
 
     render () {
-
-        return (
+        let render = this.state.dataLoaded ? (
             <div className="WatchLater">
                 <div className="WatchLater__title">
                     <h1>Watch Later Playlist</h1>
@@ -52,6 +60,11 @@ class WatchLater extends Component {
                     {this.state.videoData.length > 0 ? <VideoCardList videoData={this.state.videoData}/> : null}
                 </div>
             </div>
+        ) : (
+            <div>Data Not Loaded</div>
+        );
+        return (
+            <div>{render}</div>
         )
     }
 }

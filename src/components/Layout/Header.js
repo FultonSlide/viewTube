@@ -8,10 +8,10 @@ import './HeaderStyles/HeaderStyles.css';
 const Header = (props) => {
     return (
         <div className="Header">
-            <Link to={'/'} className="Header__link">
+            <Link to={'/'} className="Header__link" onClick={props.handleTopVideosFetch}>
                 <img src={ViewtubeLogo} alt="viewTube" className="Header__logo"/>
             </Link>
-            <SearchBar/>
+            <SearchBar search={props.search}/>
             <Navbar/>
         </div>
     );
