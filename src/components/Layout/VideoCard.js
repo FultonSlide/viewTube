@@ -31,6 +31,7 @@ class VideoCard extends Component {
                 ...this.state,
                 inStorage: false
             });
+            this.props.updateList(this.state.id);
         } else {
             this.props.addToStorage(this.state.id);
             this.setState({
@@ -43,24 +44,24 @@ class VideoCard extends Component {
     checkInStorage = (videoId) => {
         let inStorage = false; 
         for(let i=0; i < localStorage.length; i++){
-            if(videoId === localStorage.getItem([i])){
+            if(videoId === localStorage.getItem(localStorage.key(i))){
                 inStorage = true;
                 break;
             }
         }
 
         return inStorage;
-    } 
+    }
 
     render () {
         return (
             <div className="VideoCard">
                 <Link to={'/player/' + this.state.id} className="VideoCard__content" onClick={this.handleLinkClick}>
                     <img src={this.props.videoData.snippet.thumbnails.high.url} alt="thumbnail" className="VideoCard__thumbnail"/>
-                    <h2 className="VideoCard__cardTitle">{this.props.videoData.snippet.title}</h2>
+                    <h2 className="VideoCard__cardTitle">{this.props.decodeHTML(this.props.videoData.snippet.title)}</h2>
                 </Link>
                 <div className="VideoCard__info">
-                    <p className="VideoCard__channelTitle">{this.props.videoData.snippet.channelTitle}</p>
+                    <p className="VideoCard__channelTitle">{this.props.decodeHTML(this.props.videoData.snippet.channelTitle)}</p>
                     <p className="VideoCard__publishedAt">{ moment(this.props.videoData.snippet.publishedAt).fromNow() }</p>
                     {this.state.inStorage ? <img src={Add} alt="add" className="VideoCard__add VideoCard__add--active" onClick={this.handleClick}/> : <img src={Add} alt="add" className="VideoCard__add" onClick={this.handleClick}/>}
                 </div>

@@ -9,6 +9,13 @@
         }
     }
 
+    &__loading {
+        text-align: center;
+        margin: 40vh 0;
+        font-size: 30px;
+        font-weight: bold;
+    }
+
     @media (max-width: 900px){
         &__search-options {
             padding: 1.5rem;

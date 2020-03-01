@@ -5,4 +5,11 @@
             font-size: 24px;
         }
     }
+
+    &__noVideos, &__error, &__loading {
+        text-align: center;
+        margin: 40vh 0;
+        font-size: 30px;
+        font-weight: bold;
+    }
 }

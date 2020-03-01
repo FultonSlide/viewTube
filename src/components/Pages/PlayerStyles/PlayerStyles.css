@@ -58,4 +58,15 @@
   grid-row-end: 4;
   font-size: 1.2rem;
 }
+
+.Player__relatedVideos h1 {
+  margin: 1rem 25px;
+}
+
+.Player__loading {
+  text-align: center;
+  margin: 40vh 0;
+  font-size: 30px;
+  font-weight: bold;
+}
 /*# sourceMappingURL=PlayerStyles.css.map */

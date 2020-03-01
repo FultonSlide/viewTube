@@ -5,4 +5,11 @@
 .WatchLater__title h1 {
   font-size: 24px;
 }
+
+.WatchLater__noVideos, .WatchLater__error, .WatchLater__loading {
+  text-align: center;
+  margin: 40vh 0;
+  font-size: 30px;
+  font-weight: bold;
+}
 /*# sourceMappingURL=WatchLaterStyles.css.map */

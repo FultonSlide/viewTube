@@ -18,7 +18,7 @@ class Player extends Component {
 
     handleRelatedVideoFetch = (id) => {
         console.log('handleRVF');
-        fetch(`${this.props.URI}/search?part=snippet&maxResults=20&type=video&relatedToVideoId=${id}&key=${this.props.apiKey}`)
+        fetch(`${this.props.URI}/search?part=snippet&maxResults=21&type=video&relatedToVideoId=${id}&key=${this.props.apiKey}`)
             .then(response => response.json())
             .then(data => {
                 console.log(data);
@@ -73,17 +73,19 @@ class Player extends Component {
                     <p className="Player__add"></p>
                 </div>
                 <div className="Player__relatedVideos">
+                    <h1>Related Videos</h1>
                     {this.state.relatedVideos.length > 0 ? <VideoCardList 
                         videoData={this.state.relatedVideos} 
                         addToStorage={this.props.addToStorage} 
                         removeFromStorage={this.props.removeFromStorage}
                         handleRelatedVideoFetch={this.handleRelatedVideoFetch}
                         handleFetch={this.handleFetch}
-                    /> : <div>No Videos Found</div>}
+                        decodeHTML={this.props.decodeHTML}
+                    /> : <div className="Player__relVidError">No Videos Found</div>}
                 </div>
             </div>
         ) : (
-            <div className="Player__error">No Data Loaded</div>
+            <div className="Player__loading">Loading</div>
         );
         return (
             <div>{render}</div>

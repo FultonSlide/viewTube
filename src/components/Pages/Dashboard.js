@@ -34,11 +34,16 @@ class Dashboard extends Component {
                     <SearchOptions handleTitleState={this.props.handleTitleState} handleFetchTopics={this.props.handleFetchTopics}/>
                 </div>
                 <div className="Dashboard__video-cards">
-                    {this.state.videoData.length > 0 ? <VideoCardList videoData={this.state.videoData} addToStorage={this.props.addToStorage} removeFromStorage={this.props.removeFromStorage}/> : <div>No Videos Found</div>}
+                    {this.state.videoData.length > 0 ? <VideoCardList 
+                        videoData={this.state.videoData} 
+                        addToStorage={this.props.addToStorage} 
+                        removeFromStorage={this.props.removeFromStorage}
+                        decodeHTML={this.props.decodeHTML}
+                    /> : <div>No Videos Found</div>}
                 </div>
             </div>
         ): (
-            <div>Data Not Loaded</div>
+            <div className="Dashboard__loading">Loading</div>
         );
         return (
             <div>{render}</div>

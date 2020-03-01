@@ -9,10 +9,11 @@ import Player from './components/Pages/Player';
 //Key 1: AIzaSyAqSKoR84MGTlCJ_-YtywCQEucYj-747L4
 //Key 2: AIzaSyCnF4i9AoHmwEcLFkVXq95B16mv53kT5p4
 //Key 3: AIzaSyC0EQvDgWmnQQbZS_E08Wkcg-E00f5hSeI
+//key 4: AIzaSyA1EkBEFgV4LT9-ERNZpTp7yYEVYB3eyag
 
 class App extends Component {
   state = {
-    apiKey: 'AIzaSyC0EQvDgWmnQQbZS_E08Wkcg-E00f5hSeI',
+    apiKey: 'AIzaSyA1EkBEFgV4LT9-ERNZpTp7yYEVYB3eyag',
     URI: 'https://www.googleapis.com/youtube/v3',
     title: '',
     countryCode: '',
@@ -50,7 +51,7 @@ class App extends Component {
       dataLoaded: false
     });
 
-    fetch(`${this.state.URI}/search?key=${this.state.apiKey}&part=snippet&chart=mostPopular&maxResults=20`)
+    fetch(`${this.state.URI}/search?key=${this.state.apiKey}&part=snippet&chart=mostPopular&maxResults=32`)
       .then(response => response.json())
       .then(data => {
         console.log(data);
@@ -114,20 +115,26 @@ class App extends Component {
   }
 
   addToStorage = (id) => {
-    let savedVideoCount = localStorage.length;
-    localStorage.setItem(savedVideoCount++, id);
+    localStorage.setItem(id, id);
   }
 
   removeFromStorage = (id) => {
     for(let i=0; i < localStorage.length; i++){
-      if(id === localStorage.getItem([i])){
-        localStorage.removeItem([i]);
+      console.log(localStorage.getItem(localStorage.key(i)));
+      if(id === localStorage.getItem(localStorage.key(i)) || localStorage.getItem(localStorage.key(i)) == null){
+        localStorage.removeItem(localStorage.key(i));
       }
     }
   }
 
   search = (query) => {
     this.handleFetch(query);
+  }
+
+  decodeHTML = (html) => {
+    let text = document.createElement('textarea');
+    text.innerHTML = html;
+    return text.value;
   }
 
   render() {
@@ -149,6 +156,7 @@ class App extends Component {
               handleFetch={this.handleFetch}
               handleTitleState={this.handleTitleState}
               handleFetchTopics={this.handleFetchTopics}
+              decodeHTML={this.decodeHTML}
             />}></Route>
 
             <Route path='/watchlater' render={(routeProps) => <WatchLater
@@ -157,6 +165,7 @@ class App extends Component {
               URI={this.state.URI}
               addToStorage={this.addToStorage}
               removeFromStorage={this.removeFromStorage}
+              decodeHTML={this.decodeHTML}
             />}></Route>
 
             <Route path='/player/:id' render={(routeProps) => <Player
@@ -165,6 +174,7 @@ class App extends Component {
               URI={this.state.URI}
               addToStorage={this.addToStorage}
               removeFromStorage={this.removeFromStorage}
+              decodeHTML={this.decodeHTML}
             />}></Route>
           </Switch>
         </div>

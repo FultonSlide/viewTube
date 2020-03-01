@@ -15,6 +15,8 @@ const VideoCardList = (props) => {
                         removeFromStorage={props.removeFromStorage}
                         handleRelatedVideosFetch={props.handleRelatedVideoFetch}
                         handleFetch={props.handleFetch}
+                        decodeHTML={props.decodeHTML}
+                        updateList={props.updateList}
                     />
                 )
             })}
