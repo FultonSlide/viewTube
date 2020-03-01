@@ -99,5 +99,14 @@
   margin: 0;
   margin-left: auto;
   cursor: pointer;
+  -webkit-transform: rotate(0deg);
+          transform: rotate(0deg);
+  -webkit-transition: all 1s;
+  transition: all 1s;
+}
+
+.VideoCard__add--active {
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
 }
 /*# sourceMappingURL=VideoCardStyles.css.map */

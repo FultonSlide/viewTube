@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { v4 as uuid } from 'uuid';
 import VideoCard from './VideoCard';
 import './VideoCardListStyles/VideoCardListStyles.css';
 
@@ -8,7 +8,14 @@ const VideoCardList = (props) => {
         <div className="VideoCardList">
             {props.videoData.map((video) => {
                 return (
-                    <VideoCard videoData={video} key={video.id.videoId} addToStorage={props.addToStorage}/>
+                    <VideoCard 
+                        videoData={video} 
+                        key={uuid()} 
+                        addToStorage={props.addToStorage} 
+                        removeFromStorage={props.removeFromStorage}
+                        handleRelatedVideosFetch={props.handleRelatedVideoFetch}
+                        handleFetch={props.handleFetch}
+                    />
                 )
             })}
         </div>

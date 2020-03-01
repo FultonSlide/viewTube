@@ -6,6 +6,10 @@ import Dashboard from './components/Pages/Dashboard';
 import WatchLater from './components/Pages/WatchLater';
 import Player from './components/Pages/Player';
 
+//Key 1: AIzaSyAqSKoR84MGTlCJ_-YtywCQEucYj-747L4
+//Key 2: AIzaSyCnF4i9AoHmwEcLFkVXq95B16mv53kT5p4
+//Key 3: AIzaSyC0EQvDgWmnQQbZS_E08Wkcg-E00f5hSeI
+
 class App extends Component {
   state = {
     apiKey: 'AIzaSyC0EQvDgWmnQQbZS_E08Wkcg-E00f5hSeI',
@@ -40,6 +44,12 @@ class App extends Component {
   }
 
   handleTopVideosFetch = () => {
+    this.setState({
+      ...this.state,
+      videoData: [],
+      dataLoaded: false
+    });
+
     fetch(`${this.state.URI}/search?key=${this.state.apiKey}&part=snippet&chart=mostPopular&maxResults=20`)
       .then(response => response.json())
       .then(data => {
@@ -59,8 +69,14 @@ class App extends Component {
         });
       });
   }
-
+  
   handleFetch = (q) => {
+    this.setState({
+      ...this.state,
+      videoData: [],
+      dataLoaded: false
+    });
+
     fetch(`${this.state.URI}/search?key=${this.state.apiKey}&part=snippet&maxResults=30&q=${q}`)
       .then(response => response.json())
       .then(data => {
@@ -102,6 +118,14 @@ class App extends Component {
     localStorage.setItem(savedVideoCount++, id);
   }
 
+  removeFromStorage = (id) => {
+    for(let i=0; i < localStorage.length; i++){
+      if(id === localStorage.getItem([i])){
+        localStorage.removeItem([i]);
+      }
+    }
+  }
+
   search = (query) => {
     this.handleFetch(query);
   }
@@ -121,12 +145,27 @@ class App extends Component {
               dataLoaded={this.state.dataLoaded}
               title={this.state.title}
               addToStorage={this.addToStorage}
+              removeFromStorage={this.removeFromStorage}
               handleFetch={this.handleFetch}
               handleTitleState={this.handleTitleState}
               handleFetchTopics={this.handleFetchTopics}
             />}></Route>
-            <Route path='/watchlater' component={WatchLater}></Route>
-            <Route path='/player/:id' component={Player}></Route>
+
+            <Route path='/watchlater' render={(routeProps) => <WatchLater
+              {...routeProps}
+              apiKey={this.state.apiKey}
+              URI={this.state.URI}
+              addToStorage={this.addToStorage}
+              removeFromStorage={this.removeFromStorage}
+            />}></Route>
+
+            <Route path='/player/:id' render={(routeProps) => <Player
+              {...routeProps} 
+              apiKey={this.state.apiKey}
+              URI={this.state.URI}
+              addToStorage={this.addToStorage}
+              removeFromStorage={this.removeFromStorage}
+            />}></Route>
           </Switch>
         </div>
       </BrowserRouter>

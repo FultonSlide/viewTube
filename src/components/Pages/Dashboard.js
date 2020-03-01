@@ -3,10 +3,6 @@ import VideoCardList from '../Layout/VideoCardList';
 import SearchOptions from '../Atoms/SearchOptions';
 import './DashboardStyles/DashboardStyles.css';
 
-//Old key, quota reached: AIzaSyAqSKoR84MGTlCJ_-YtywCQEucYj-747L4
-//Key 2: AIzaSyCnF4i9AoHmwEcLFkVXq95B16mv53kT5p4
-//Key 3: AIzaSyC0EQvDgWmnQQbZS_E08Wkcg-E00f5hSeI
-
 class Dashboard extends Component {
     state = {
         title: '',
@@ -38,7 +34,7 @@ class Dashboard extends Component {
                     <SearchOptions handleTitleState={this.props.handleTitleState} handleFetchTopics={this.props.handleFetchTopics}/>
                 </div>
                 <div className="Dashboard__video-cards">
-                    {this.state.videoData.length > 0 ? <VideoCardList videoData={this.state.videoData} addToStorage={this.props.addToStorage}/> : <div>No Videos Found</div>}
+                    {this.state.videoData.length > 0 ? <VideoCardList videoData={this.state.videoData} addToStorage={this.props.addToStorage} removeFromStorage={this.props.removeFromStorage}/> : <div>No Videos Found</div>}
                 </div>
             </div>
         ): (

@@ -6,19 +6,17 @@ class WatchLater extends Component {
     state = {
         videoIds: [],
         videoData: [],
-        apiKey: 'AIzaSyC0EQvDgWmnQQbZS_E08Wkcg-E00f5hSeI',
-        URI: 'https://www.googleapis.com/youtube/v3',
         dataLoaded: false
     }
 
     getLocalStorage = () => {
-        for(let i=0; i < localStorage.length; i++){
+        for(let i=localStorage.length-1; i >= 0; i--){
             this.state.videoIds.push(localStorage.getItem([i]));
         }
     }
 
     handleFetch = (id) => {
-        fetch(`${this.state.URI}/videos?part=snippet&id=${id}&key=${this.state.apiKey}`)
+        fetch(`${this.props.URI}/videos?part=snippet&id=${id}&key=${this.props.apiKey}`)
             .then(response => response.json())
             .then(data => {
                 console.log(data);
@@ -57,7 +55,7 @@ class WatchLater extends Component {
                 </div>
 
                 <div className="WatchLater__video-cards">
-                    {this.state.videoData.length > 0 ? <VideoCardList videoData={this.state.videoData}/> : null}
+                    {this.state.videoData.length > 0 ? <VideoCardList videoData={this.state.videoData} addToStorage={this.props.addToStorage} removeFromStorage={this.props.removeFromStorage}/> : null}
                 </div>
             </div>
         ) : (

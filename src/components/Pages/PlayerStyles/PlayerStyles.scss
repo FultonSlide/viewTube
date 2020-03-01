@@ -1,11 +1,50 @@
 .Player {
     &__video {
-        margin-top: 2rem;
+        margin-top: 1rem;
         text-align: center;
         background-color: black;
         iframe {
             width: 80vw;
             height: 40vw;
         }
+    }
+
+    &__details {
+        display: grid;
+        grid-template-columns: repeat(3, auto);
+        grid-template-rows: repeat(3, auto);
+        margin: 0 25px;
+    }
+
+    &__title {
+        grid-column-start: 1;
+        grid-column-end: 4;
+        grid-row-start: 1;
+        grid-row-end: 2;
+        font-size: 2rem;
+    }
+
+    &__desc {
+        grid-column-start: 1;
+        grid-column-end: 4;
+        grid-row-start: 2;
+        grid-row-end: 3;
+    }
+
+    &__channelName {
+        grid-column-start: 1;
+        grid-column-end: 2;
+        grid-row-start: 3;
+        grid-row-end: 4;
+        font-size: 1.2rem;
+        font-weight: bold;
+    }
+
+    &__publishedAt {
+        grid-column-start: 2;
+        grid-column-end: 3;
+        grid-row-start: 3;
+        grid-row-end: 4;
+        font-size: 1.2rem;
     }
 }

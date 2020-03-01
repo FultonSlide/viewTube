@@ -1,5 +1,5 @@
 .Player__video {
-  margin-top: 2rem;
+  margin-top: 1rem;
   text-align: center;
   background-color: black;
 }
@@ -7,5 +7,55 @@
 .Player__video iframe {
   width: 80vw;
   height: 40vw;
+}
+
+.Player__details {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (auto)[3];
+      grid-template-columns: repeat(3, auto);
+  -ms-grid-rows: (auto)[3];
+      grid-template-rows: repeat(3, auto);
+  margin: 0 25px;
+}
+
+.Player__title {
+  -ms-grid-column: 1;
+      grid-column-start: 1;
+  grid-column-end: 4;
+  -ms-grid-row: 1;
+      grid-row-start: 1;
+  grid-row-end: 2;
+  font-size: 2rem;
+}
+
+.Player__desc {
+  -ms-grid-column: 1;
+      grid-column-start: 1;
+  grid-column-end: 4;
+  -ms-grid-row: 2;
+      grid-row-start: 2;
+  grid-row-end: 3;
+}
+
+.Player__channelName {
+  -ms-grid-column: 1;
+      grid-column-start: 1;
+  grid-column-end: 2;
+  -ms-grid-row: 3;
+      grid-row-start: 3;
+  grid-row-end: 4;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.Player__publishedAt {
+  -ms-grid-column: 2;
+      grid-column-start: 2;
+  grid-column-end: 3;
+  -ms-grid-row: 3;
+      grid-row-start: 3;
+  grid-row-end: 4;
+  font-size: 1.2rem;
 }
 /*# sourceMappingURL=PlayerStyles.css.map */
