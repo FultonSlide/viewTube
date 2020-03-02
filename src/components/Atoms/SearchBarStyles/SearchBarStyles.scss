@@ -43,4 +43,10 @@
             }
         }
     }
+
+    @media (max-width: 375px){
+        .Button {
+            display: none;
+        }
+    }
 }

@@ -12,11 +12,12 @@
         }
 
         &__logo {
-            width: 65px;
+            width: 200px;
         }
 
         &__title {
-            width: 225px;
+            max-width: 225px;
+            width: 40vw;
             cursor: pointer;
         }
 
@@ -25,6 +26,12 @@
             justify-content: center;
             padding: 0;
             margin-top: -16px;
+        }
+    }
+
+    @media (max-width: 900px){
+        &__nav {
+            padding: 1rem 1rem;
         }
     }
 }

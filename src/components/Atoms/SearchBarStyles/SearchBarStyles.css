@@ -60,4 +60,10 @@
     width: 22px;
   }
 }
+
+@media (max-width: 375px) {
+  .SearchBar .Button {
+    display: none;
+  }
+}
 /*# sourceMappingURL=SearchBarStyles.css.map */

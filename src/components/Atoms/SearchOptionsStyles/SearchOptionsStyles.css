@@ -34,5 +34,18 @@
     color: white;
     border: 2px solid #DD0426;
   }
+  .SearchOptions__item--active {
+    background-color: #DD0426;
+    color: white;
+    border: 2px solid #DD0426;
+  }
+}
+
+@media (max-width: 375px) {
+  .SearchOptions__item {
+    font-size: 20px;
+    padding: 4px 9px;
+    margin: 0;
+  }
 }
 /*# sourceMappingURL=SearchOptionsStyles.css.map */

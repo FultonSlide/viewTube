@@ -1,5 +1,7 @@
 .VideoCard {
-  width: 412px;
+  width: 100vw;
+  max-width: 412px;
+  min-width: 320px;
   height: auto;
   margin: 1rem;
   -webkit-box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -28,8 +30,11 @@
   -ms-grid-row: 1;
       grid-row-start: 1;
   grid-row-end: 2;
-  height: 310px;
-  width: 412px;
+  width: 92vw;
+  max-height: 310px;
+  max-width: 412px;
+  min-height: 240px;
+  min-width: 320px;
   border-top-left-radius: 25px;
   border-top-right-radius: 25px;
 }
@@ -44,7 +49,7 @@
   padding: 0 10px;
   padding-top: 5px;
   margin: 0.6rem 0;
-  font-size: 20px;
+  font-size: 1rem;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -81,6 +86,9 @@
   margin: 0.5rem 0;
   font-size: 14px;
   font-weight: bold;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .VideoCard__publishedAt {

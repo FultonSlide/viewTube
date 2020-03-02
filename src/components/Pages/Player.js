@@ -52,7 +52,7 @@ class Player extends Component {
     }
 
     handleFetch = (id) => {
-        fetch(`${this.props.URI}/videos?part=snippet&id=${id}&key=${this.props.apiKey}`)
+        fetch(`${this.props.URI}/videos?part=snippet&id=${id}&type=video&key=${this.props.apiKey}`)
             .then(response => response.json())
             .then(data => {
                 if(data.error){
@@ -115,7 +115,7 @@ class Player extends Component {
                     </div>
                 </div>
             ) : (
-                <div className="Player__loading">Loading</div>
+                <div className="Player__loading"><img src={this.props.spinner} alt="loading" className="Player__spinner"/></div>
             );
         } else {
             render = <div className="Player__error">{this.state.errorMsg}</div>;

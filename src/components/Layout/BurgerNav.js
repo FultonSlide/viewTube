@@ -38,6 +38,7 @@ class BurgerNav extends Component {
                         </Link>
                     </ul>
                 </div>
+                <div className={this.state.navActive ? 'BurgerNav__overlay BurgerNav__overlay--active' : 'BurgerNav__overlay'} onClick={this.handleClick}></div>
             </div>
         )
     }

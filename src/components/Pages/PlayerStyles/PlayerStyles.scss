@@ -1,6 +1,14 @@
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    } to {
+        transform: rotate(-360deg);
+    }
+}
+
 .Player {
     &__video {
-        margin-top: 1rem;
+        margin-top: 0rem;
         text-align: center;
         background-color: black;
         iframe {
@@ -48,7 +56,7 @@
             height: 7px;
             width: 30px;
             border-radius: 50px;
-            background-color: #0A4272;
+            background-color: #DD0426;
         }
     }
 
@@ -73,12 +81,46 @@
         h1 {
             margin: 1rem 25px;
         }
-    }
 
-    &__loading, &__error {
+        &:before {
+            content: '';
+            display: block;
+            height: 3px;
+            width: 95vw;
+            background-color: #0A4272;
+            opacity: 0.5;
+            border-radius: 50px;
+            margin: 2rem auto;
+        }
+    }
+    
+    &__error {
         text-align: center;
         margin: 40vh 0;
         font-size: 30px;
         font-weight: bold;
+    }
+
+    &__loading {
+        text-align: center;
+    }
+    
+    &__spinner {
+        animation: spin 1s infinite linear;
+        margin: 30vh 0;
+        width: 80px;
+    }
+
+    @media (max-width: 900px){
+        &__video {
+            margin-top: 1rem;
+            iframe {
+                height: 70vw;
+            }
+        }
+
+        &__relatedVideos {
+            text-align: center;
+        }
     }
 }

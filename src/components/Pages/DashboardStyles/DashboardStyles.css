@@ -4,8 +4,8 @@
             transform: rotate(0deg);
   }
   to {
-    -webkit-transform: rotate(360deg);
-            transform: rotate(360deg);
+    -webkit-transform: rotate(-360deg);
+            transform: rotate(-360deg);
   }
 }
 
@@ -15,8 +15,8 @@
             transform: rotate(0deg);
   }
   to {
-    -webkit-transform: rotate(360deg);
-            transform: rotate(360deg);
+    -webkit-transform: rotate(-360deg);
+            transform: rotate(-360deg);
   }
 }
 
@@ -34,10 +34,30 @@
   font-size: 24px;
 }
 
-.Dashboard__loading {
+.Dashboard__error {
   text-align: center;
   margin: 40vh 0;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.Dashboard__loading {
+  text-align: center;
+}
+
+.Dashboard__spinner {
+  -webkit-animation: spin 1s infinite linear;
+          animation: spin 1s infinite linear;
+  margin: 30vh 0;
   width: 80px;
+}
+
+.Dashboard__nextPage {
+  height: 30px;
+  width: 30px;
+  background-color: red;
+  margin: 2rem auto;
+  cursor: pointer;
 }
 
 @media (max-width: 900px) {
@@ -46,6 +66,12 @@
   }
   .Dashboard__search-options h1 {
     display: none;
+  }
+  .Dashboard__spinner {
+    margin: 20vh 0;
+  }
+  .Dashboard__error {
+    margin: 20vh 0;
   }
 }
 /*# sourceMappingURL=DashboardStyles.css.map */

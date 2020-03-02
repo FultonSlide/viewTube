@@ -2,9 +2,10 @@
     from {
         transform: rotate(0deg);
     } to {
-        transform: rotate(360deg);
+        transform: rotate(-360deg);
     }
 }
+
 .Dashboard {
     &__search-options {
         display: flex;
@@ -16,17 +17,29 @@
         }
     }
 
-    // &__loading, &__error {
-    //     text-align: center;
-    //     margin: 40vh 0;
-    //     font-size: 30px;
-    //     font-weight: bold;
-    // }
+    &__error {
+        text-align: center;
+        margin: 40vh 0;
+        font-size: 30px;
+        font-weight: bold;
+    }
 
     &__loading {
         text-align: center;
-        margin: 40vh 0;
+    }
+
+    &__spinner {
+        animation: spin 1s infinite linear;
+        margin: 30vh 0;
         width: 80px;
+    }
+
+    &__nextPage {
+        height: 30px;
+        width: 30px;
+        background-color: red;
+        margin: 2rem auto;
+        cursor: pointer;
     }
 
     @media (max-width: 900px){
@@ -36,6 +49,14 @@
             h1 {
                 display: none;
             }
+        }
+
+        &__spinner {
+            margin: 20vh 0;
+        }
+
+        &__error {
+            margin: 20vh 0;
         }
     }
 }

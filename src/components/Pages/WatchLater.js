@@ -99,7 +99,7 @@ class WatchLater extends Component {
                             </div>
                         </div>;
                 } else {
-                    render = <div className="WatchLater__loading">Loading</div>;
+                    render = <div className="WatchLater__loading"><img src={this.props.spinner} alt="loading" className="Player__spinner"/></div>;
                 }
             } else {
                 render = <div className="WatchLater__noVideos">No videos in your playlist</div>;

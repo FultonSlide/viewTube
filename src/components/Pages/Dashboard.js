@@ -8,6 +8,7 @@ class Dashboard extends Component {
         title: '',
         dataLoaded: false,
         videoData: [],
+        nextPageToken: '',
         error: false,
         errorMsg: ''
     }
@@ -21,14 +22,19 @@ class Dashboard extends Component {
         })
     }
 
-    componentWillReceiveProps(nextProps) {
+    UNSAFE_componentWillReceiveProps(nextProps) {
         this.setState({
             title: nextProps.title,
             dataLoaded: nextProps.dataLoaded,
             videoData: nextProps.videoData,
+            nextPageToken: nextProps.nextPageToken,
             error: nextProps.error,
             errorMsg: nextProps.errorMsg
         })
+    }
+
+    handlePageNav = () => {
+        this.props.handleChangePage(this.state.nextPageToken);
     }
 
     render () {
@@ -48,12 +54,14 @@ class Dashboard extends Component {
                             decodeHTML={this.props.decodeHTML}
                         /> : <div className="Dashboard__error">No Videos Found</div>}
                     </div>
+                    {/* <div className="Dashboard__nextPage" onClick={this.handlePageNav}></div>
+                    <div className="Dashboard__prevPage"></div> */}
                 </div>
             ): (
-                <div className="Dashboard__loading">{this.props.spinner}</div>
+                <div className="Dashboard__loading"><img src={this.props.spinner} alt="loading" className="Dashboard__spinner"/></div>
             );
         } else {
-            render = <div className="Dashboard__error"><img src={this.props.spinner} alt="loading" className="Dashboard__loading"/></div> //{this.state.errorMsg}
+            render = <div className="Dashboard__error">{this.state.errorMsg}</div>
         }
         
         return (

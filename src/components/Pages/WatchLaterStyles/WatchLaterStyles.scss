@@ -1,3 +1,11 @@
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    } to {
+        transform: rotate(-360deg);
+    }
+}
+
 .WatchLater {
     &__title {
         padding: 1rem 6rem;
@@ -6,10 +14,28 @@
         }
     }
 
-    &__noVideos, &__error, &__loading {
+    &__noVideos, &__error {
         text-align: center;
         margin: 40vh 0;
         font-size: 30px;
         font-weight: bold;
+    }
+
+    &__loading {
+        text-align: center;
+    }
+    
+    &__spinner {
+        animation: spin 1s infinite linear;
+        margin: 30vh 0;
+        width: 80px;
+    }
+
+    @media(max-width: 500px){
+        &__title {
+            text-align: center;
+            padding: 0 1rem;
+            padding-top: 0.7rem;
+        }
     }
 }

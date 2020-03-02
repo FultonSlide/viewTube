@@ -12,10 +12,12 @@ import Spinner from './assets/svgs/Spinner.svg';
 //Key 3: AIzaSyC0EQvDgWmnQQbZS_E08Wkcg-E00f5hSeI
 //key 4: AIzaSyA1EkBEFgV4LT9-ERNZpTp7yYEVYB3eyag
 //key 5: AIzaSyDILyPjlX9vs82_TWKWcVNlg991z5gWi7c
+//key 6: AIzaSyDvnl0fsPFpF4MWk2w6HFBrB6Be0hxRftc
+//key 7: AIzaSyA2r-OIc2CoViwUs08k_ZzGyhB0kQAazLM
 
 class App extends Component {
   state = {
-    apiKey: 'AIzaSyDILyPjlX9vs82_TWKWcVNlg991z5gWi7c',
+    apiKey: 'AIzaSyA2r-OIc2CoViwUs08k_ZzGyhB0kQAazLM',
     URI: 'https://www.googleapis.com/youtube/v3',
     title: '',
     countryCode: '',
@@ -24,6 +26,7 @@ class App extends Component {
     sportsTopicID: 'sports',
     dataLoaded: false,
     videoData: [],
+    nextPageToken: '', 
     navDetail: '',
     navTo: '',
     error: false,
@@ -49,7 +52,7 @@ class App extends Component {
   }
 
   handleTopVideosFetch = () => {
-    fetch(`${this.state.URI}/search?key=${this.state.apiKey}&part=snippet&chart=mostPopular&maxResults=32`)
+    fetch(`${this.state.URI}/search?key=${this.state.apiKey}&part=snippet&type=video&chart=mostPopular&maxResults=32`)
       .then(response => response.json())
       .then(data => {
         if(data.error){
@@ -63,6 +66,7 @@ class App extends Component {
             title: 'Popular Videos',
             dataLoaded: true,
             videoData: data.items,
+            nextPageToken: data.nextPageToken,
             error: false
           });
         }
@@ -76,7 +80,7 @@ class App extends Component {
   }
   
   handleFetch = (q, title) => {
-    fetch(`${this.state.URI}/search?key=${this.state.apiKey}&part=snippet&maxResults=30&q=${q}`)
+    fetch(`${this.state.URI}/search?key=${this.state.apiKey}&part=snippet&type=video&maxResults=32&q=${q}`)
       .then(response => response.json())
       .then(data => {
         this.setState({
@@ -94,7 +98,35 @@ class App extends Component {
       });
   }
 
+  handleChangePage = (pageToken) => {
+    this.setState({
+      ...this.state,
+      dataLoaded: false,
+      videoData: []
+    });
+    fetch(`${this.state.URI}/search?key=${this.state.apiKey}&part=snippet&type=video&maxResults=32&pageToken=${pageToken}`)
+      .then(response => response.json())
+      .then(data => {
+        this.setState({
+          ...this.state,
+          dataLoaded: true,
+          videoData: data.items
+        })
+      })
+      .catch(err => {
+        this.setState({
+          ...this.state,
+          dataLoaded: false
+        });
+      });
+  }
+
   handleFetchTopics = (title) => {
+    this.setState({
+      ...this.state,
+      dataLoaded: false,
+      videoData: []
+    });
     let newTitle = this.handleTitleState(title);
     if(title === 'Music') {
       this.handleFetch(this.state.musicTopicID, newTitle);
@@ -160,6 +192,8 @@ class App extends Component {
               error={this.state.error}
               errorMsg={this.state.errorMsg}
               spinner={Spinner}
+              handleChangePage={this.handleChangePage}
+              nextPageToken={this.state.nextPageToken}
             />}></Route>
 
             <Route path='/watchlater' render={(routeProps) => <WatchLater
@@ -169,6 +203,7 @@ class App extends Component {
               addToStorage={this.addToStorage}
               removeFromStorage={this.removeFromStorage}
               decodeHTML={this.decodeHTML}
+              spinner={Spinner}
             />}></Route>
 
             <Route path='/player/:id' render={(routeProps) => <Player
@@ -179,6 +214,7 @@ class App extends Component {
               removeFromStorage={this.removeFromStorage}
               decodeHTML={this.decodeHTML}
               error={this.state.errorMsg}
+              spinner={Spinner}
             />}></Route>
           </Switch>
         </div>

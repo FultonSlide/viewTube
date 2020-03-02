@@ -56,7 +56,7 @@
 
     &__sideDrawer {
         position: fixed;
-        z-index: 1;
+        z-index: 2;
         top: 0;
         right: 0;
         width: 300px;
@@ -76,13 +76,48 @@
 
     &__list {
         list-style: none;
+        margin: 0;
+        padding: 0;
+        text-align: center;
     }
 
     &__item {
         display: inline-block;
-        margin-top: 30px;
+        margin-top: 33px;
         font-weight: 800;
         font-size: 18px;
         cursor: pointer;
+    }
+
+    &__overlay {
+        position: fixed;
+        z-index: -1;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        background: rgba(0,0,0,0);
+        cursor: pointer;
+        transition: all 1s;
+
+        &--active {
+            z-index: 1;
+            background: rgba(0,0,0,0.3);
+        }
+    }
+
+    @media (max-width: 500px) {
+        &__sideDrawer {
+            width: 200px;
+            transform: translateX(200px);
+            &--active {
+                transform: translateX(0px);
+            }
+        }
+
+        &__item {
+            margin: 0 auto;
+            margin-top: 95px;
+        }
     }
 }

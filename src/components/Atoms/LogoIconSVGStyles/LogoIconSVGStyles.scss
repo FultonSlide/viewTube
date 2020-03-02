@@ -1,5 +1,9 @@
 .LogoIconSVG {
-    width: 85px;
+    max-width: 85px;
+    max-height: 85px;
+
+    width: 20vw;
+    height: 20vw;
 
     @keyframes blink-upperEyelid {
         from {
@@ -19,7 +23,7 @@
 
     @keyframes close-eye {
         from {
-            
+
         } to {
 
         }
@@ -29,23 +33,23 @@
         transform: translateX(20px);
     }
 
-    #BlueEyelid-group {
-        transform: translate(-20px, -45px);
+    // #BlueEyelid-group {
+    //     transform: translate(-20px, -45px);
         
-        #BlueEyelid {
-            animation: blink-lowerEyelid 2s infinite;
-            transform-origin: right;
-            transform-box: fill-box;
-        }
-    }
+    //     #BlueEyelid {
+    //         animation: blink-lowerEyelid 2s infinite;
+    //         transform-origin: right;
+    //         transform-box: fill-box;
+    //     }
+    // }
     
-    #RedEyelid-group {
-        transform: translate(-25px, 45px);
+    // #RedEyelid-group {
+    //     transform: translate(-25px, 45px);
 
-        #RedEyelid {
-            animation: blink-upperEyelid 2s infinite;
-            transform-origin: right;
-            transform-box: fill-box;
-        }
-    }
+    //     #RedEyelid {
+    //         animation: blink-upperEyelid 2s infinite;
+    //         transform-origin: right;
+    //         transform-box: fill-box;
+    //     }
+    // }
 }
