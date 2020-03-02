@@ -15,9 +15,11 @@ import Spinner from './assets/svgs/Spinner.svg';
 //key 6: AIzaSyDvnl0fsPFpF4MWk2w6HFBrB6Be0hxRftc
 //key 7: AIzaSyA2r-OIc2CoViwUs08k_ZzGyhB0kQAazLM
 
+//key 8: AIzaSyDvSG4FMFNiVX--PnACyWktWVepiUzlIjc
+
 class App extends Component {
   state = {
-    apiKey: 'AIzaSyA2r-OIc2CoViwUs08k_ZzGyhB0kQAazLM',
+    apiKey: 'AIzaSyDvSG4FMFNiVX--PnACyWktWVepiUzlIjc',
     URI: 'https://www.googleapis.com/youtube/v3',
     title: '',
     countryCode: '',
