@@ -6,7 +6,9 @@ class WatchLater extends Component {
     state = {
         videoIds: [],
         videoData: [],
-        dataLoaded: false
+        dataLoaded: false,
+        error: false,
+        errorMsg: 'Daily Youtube API video limit exceeded, check back again later!'
     }
 
     componentDidMount() {
@@ -16,7 +18,7 @@ class WatchLater extends Component {
             for(let i=0; i < this.state.videoIds.length; i++){
                 query += `${this.state.videoIds[i]},`
             }
-            console.log(query);
+
             if(query){
                 this.handleFetch(query);
             }
@@ -38,7 +40,7 @@ class WatchLater extends Component {
         for(let i=0; i < videoIds.length; i++){
             query += `${videoIds[i]},`
         }
-        console.log(query);
+
         if(query){
             this.handleFetch(query);
         }
@@ -52,15 +54,23 @@ class WatchLater extends Component {
         fetch(`${this.props.URI}/videos?part=snippet&id=${id}&key=${this.props.apiKey}`)
             .then(response => response.json())
             .then(data => {
-                console.log(data);
-                this.setState({
-                    ...this.state,
-                    dataLoaded: true,
-                    videoData: data.items
-                })
+
+                if(data.error){
+                    this.setState({
+                        ...this.state,
+                        error: true
+                    })
+                } else {
+                    this.setState({
+                        ...this.state,
+                        dataLoaded: true,
+                        videoData: data.items,
+                        error: false
+                    });
+                }
             })
             .catch(err => {
-                console.log(err);
+
                 this.setState({
                     ...this.state,
                     dataLoaded: false
@@ -70,28 +80,32 @@ class WatchLater extends Component {
 
     render () {
         let render;
-        if(localStorage.length !== 0){
-            if(this.state.dataLoaded){
-                render = <div className="WatchLater">
-                        <div className="WatchLater__title">
-                            <h1>Watch Later Playlist</h1>
-                        </div>
-
-                        <div className="WatchLater__video-cards">
-                            {this.state.videoData.length > 0 ? <VideoCardList 
-                                videoData={this.state.videoData} 
-                                addToStorage={this.props.addToStorage} 
-                                removeFromStorage={this.props.removeFromStorage}
-                                decodeHTML={this.props.decodeHTML}
-                                updateList={this.updateList}
-                            /> : <div className="WatchLater__error">Error, please refresh the application</div>}
-                        </div>
-                    </div>;
+        if(!this.state.error){
+            if(localStorage.length !== 0){
+                if(this.state.dataLoaded){
+                    render = <div className="WatchLater">
+                            <div className="WatchLater__title">
+                                <h1>Watch Later Playlist</h1>
+                            </div>
+    
+                            <div className="WatchLater__video-cards">
+                                {this.state.videoData.length > 0 ? <VideoCardList 
+                                    videoData={this.state.videoData} 
+                                    addToStorage={this.props.addToStorage} 
+                                    removeFromStorage={this.props.removeFromStorage}
+                                    decodeHTML={this.props.decodeHTML}
+                                    updateList={this.updateList}
+                                /> : <div className="WatchLater__error">Error, oops something went wrong</div>}
+                            </div>
+                        </div>;
+                } else {
+                    render = <div className="WatchLater__loading">Loading</div>;
+                }
             } else {
-                render = <div className="WatchLater__loading">Loading</div>
+                render = <div className="WatchLater__noVideos">No videos in your playlist</div>;
             }
         } else {
-            render = <div className="WatchLater__noVideos">No videos in your playlist</div>;
+            render = <div className="WatchLater__error">{this.state.errorMsg}</div>;
         }
 
         return (

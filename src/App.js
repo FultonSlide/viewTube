@@ -5,15 +5,17 @@ import MobileHeader from './components/Layout/MobileHeader';
 import Dashboard from './components/Pages/Dashboard';
 import WatchLater from './components/Pages/WatchLater';
 import Player from './components/Pages/Player';
+import Spinner from './assets/svgs/Spinner.svg';
 
 //Key 1: AIzaSyAqSKoR84MGTlCJ_-YtywCQEucYj-747L4
 //Key 2: AIzaSyCnF4i9AoHmwEcLFkVXq95B16mv53kT5p4
 //Key 3: AIzaSyC0EQvDgWmnQQbZS_E08Wkcg-E00f5hSeI
 //key 4: AIzaSyA1EkBEFgV4LT9-ERNZpTp7yYEVYB3eyag
+//key 5: AIzaSyDILyPjlX9vs82_TWKWcVNlg991z5gWi7c
 
 class App extends Component {
   state = {
-    apiKey: 'AIzaSyC0EQvDgWmnQQbZS_E08Wkcg-E00f5hSeI',
+    apiKey: 'AIzaSyDILyPjlX9vs82_TWKWcVNlg991z5gWi7c',
     URI: 'https://www.googleapis.com/youtube/v3',
     title: '',
     countryCode: '',
@@ -21,14 +23,17 @@ class App extends Component {
     gamingTopicID: 'gaming',
     sportsTopicID: 'sports',
     dataLoaded: false,
-    videoData: []
+    videoData: [],
+    navDetail: '',
+    navTo: '',
+    error: false,
+    errorMsg: 'Daily Youtube API video limit exceeded, check back again later!'
   }
 
   componentDidMount() {
     fetch('https://extreme-ip-lookup.com/json/')
       .then( res => res.json())
       .then(response => {
-        console.log("Country: ", response);
         this.setState({
           ...this.state,
           countryCode: response.countryCode
@@ -36,7 +41,6 @@ class App extends Component {
         this.handleTopVideosFetch();
       })
       .catch(err => {
-        console.log(err);
         this.setState({
           ...this.state,
           dataLoaded: false
@@ -45,25 +49,25 @@ class App extends Component {
   }
 
   handleTopVideosFetch = () => {
-    this.setState({
-      ...this.state,
-      videoData: [],
-      dataLoaded: false
-    });
-
     fetch(`${this.state.URI}/search?key=${this.state.apiKey}&part=snippet&chart=mostPopular&maxResults=32`)
       .then(response => response.json())
       .then(data => {
-        console.log(data);
-        this.setState({
-          ...this.state,
-          title: 'Top Videos',
-          dataLoaded: true,
-          videoData: data.items
-        });
+        if(data.error){
+          this.setState({
+            ...this.state,
+            error: true
+          })
+        } else {
+          this.setState({
+            ...this.state,
+            title: 'Popular Videos',
+            dataLoaded: true,
+            videoData: data.items,
+            error: false
+          });
+        }
       })
       .catch(err => {
-        console.log(err);
         this.setState({
           ...this.state,
           dataLoaded: false
@@ -71,24 +75,18 @@ class App extends Component {
       });
   }
   
-  handleFetch = (q) => {
-    this.setState({
-      ...this.state,
-      videoData: [],
-      dataLoaded: false
-    });
-
+  handleFetch = (q, title) => {
     fetch(`${this.state.URI}/search?key=${this.state.apiKey}&part=snippet&maxResults=30&q=${q}`)
       .then(response => response.json())
       .then(data => {
         this.setState({
           ...this.state,
+          title,
           dataLoaded: true,
           videoData: data.items
         })
       })
       .catch(err => {
-        console.log(err);
         this.setState({
           ...this.state,
           dataLoaded: false
@@ -97,21 +95,19 @@ class App extends Component {
   }
 
   handleFetchTopics = (title) => {
+    let newTitle = this.handleTitleState(title);
     if(title === 'Music') {
-      this.handleFetch(this.state.musicTopicID);
+      this.handleFetch(this.state.musicTopicID, newTitle);
     } else if(title === 'Gaming'){
-      this.handleFetch(this.state.gamingTopicID);
+      this.handleFetch(this.state.gamingTopicID, newTitle);
     } else if(title === 'Sports'){
-      this.handleFetch(this.state.sportsTopicID);
+      this.handleFetch(this.state.sportsTopicID, newTitle);
     }
   }
 
   handleTitleState = (title) => {
-    console.log(title);
-    if(title === 'Music' || title === 'Gaming' || title === 'Sports' || title === 'Top Videos'){
-      this.setState({
-        title
-      });
+    if(title === 'Music' || title === 'Gaming' || title === 'Sports' || title === 'Popular Videos' || title === 'Search'){
+      return title;
     }
   }
 
@@ -121,7 +117,6 @@ class App extends Component {
 
   removeFromStorage = (id) => {
     for(let i=0; i < localStorage.length; i++){
-      console.log(localStorage.getItem(localStorage.key(i)));
       if(id === localStorage.getItem(localStorage.key(i)) || localStorage.getItem(localStorage.key(i)) == null){
         localStorage.removeItem(localStorage.key(i));
       }
@@ -129,7 +124,12 @@ class App extends Component {
   }
 
   search = (query) => {
-    this.handleFetch(query);
+    this.setState({
+      ...this.state,
+      dataLoaded: false,
+      videoData: []
+    });
+    this.handleFetch(query, 'Search');
   }
 
   decodeHTML = (html) => {
@@ -155,9 +155,11 @@ class App extends Component {
               addToStorage={this.addToStorage}
               removeFromStorage={this.removeFromStorage}
               handleFetch={this.handleFetch}
-              handleTitleState={this.handleTitleState}
               handleFetchTopics={this.handleFetchTopics}
               decodeHTML={this.decodeHTML}
+              error={this.state.error}
+              errorMsg={this.state.errorMsg}
+              spinner={Spinner}
             />}></Route>
 
             <Route path='/watchlater' render={(routeProps) => <WatchLater
@@ -176,6 +178,7 @@ class App extends Component {
               addToStorage={this.addToStorage}
               removeFromStorage={this.removeFromStorage}
               decodeHTML={this.decodeHTML}
+              error={this.state.errorMsg}
             />}></Route>
           </Switch>
         </div>

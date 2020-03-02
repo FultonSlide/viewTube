@@ -4,7 +4,6 @@ import './SearchOptionsStyles/SearchOptionsStyles.css';
 class SearchOptions extends Component {
     handleClick = (e) => {
         e.stopPropagation();
-        this.props.handleTitleState(e.target.innerText);
         this.props.handleFetchTopics(e.target.innerText);
     }
 

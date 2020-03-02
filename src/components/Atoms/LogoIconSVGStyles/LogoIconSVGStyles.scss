@@ -1,0 +1,51 @@
+.LogoIconSVG {
+    width: 85px;
+
+    @keyframes blink-upperEyelid {
+        from {
+            transform: rotate(30deg);
+        } to {
+            transform: rotate(0deg);
+        }
+    }
+
+    @keyframes blink-lowerEyelid {
+        from {
+            transform: rotate(-30deg);
+        } to {
+            transform: rotate(0deg);
+        }
+    }
+
+    @keyframes close-eye {
+        from {
+            
+        } to {
+
+        }
+    }
+
+    #IconGroup {
+        transform: translateX(20px);
+    }
+
+    #BlueEyelid-group {
+        transform: translate(-20px, -45px);
+        
+        #BlueEyelid {
+            animation: blink-lowerEyelid 2s infinite;
+            transform-origin: right;
+            transform-box: fill-box;
+        }
+    }
+    
+    #RedEyelid-group {
+        transform: translate(-25px, 45px);
+
+        #RedEyelid {
+            animation: blink-upperEyelid 2s infinite;
+            transform-origin: right;
+            transform-box: fill-box;
+        }
+    }
+}

@@ -1,6 +1,8 @@
 .BurgerNav {
   padding: 1.8rem 1.3rem;
   cursor: pointer;
+  position: relative;
+  z-index: 4;
 }
 
 .BurgerNav:before {
@@ -45,15 +47,53 @@
 .BurgerNav--active:before {
   -webkit-transform: rotate(45deg) translate(5px, 3.5px);
           transform: rotate(45deg) translate(5px, 3.5px);
+  background-color: white;
 }
 
 .BurgerNav--active__icon {
   -webkit-transform: rotate(-45deg) translate(-1px);
           transform: rotate(-45deg) translate(-1px);
+  background-color: white;
 }
 
 .BurgerNav--active:after {
   -webkit-transform: translateX(15px) rotate(45deg) translate(-5px);
           transform: translateX(15px) rotate(45deg) translate(-5px);
+  background-color: white;
+}
+
+.BurgerNav__sideDrawer {
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  right: 0;
+  width: 300px;
+  background-color: #DD0426;
+  height: 100vh;
+  -webkit-transform: translateX(300px);
+          transform: translateX(300px);
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
+}
+
+.BurgerNav__sideDrawer--active {
+  -webkit-transform: translateX(0px);
+          transform: translateX(0px);
+}
+
+.BurgerNav__link {
+  color: white;
+}
+
+.BurgerNav__list {
+  list-style: none;
+}
+
+.BurgerNav__item {
+  display: inline-block;
+  margin-top: 30px;
+  font-weight: 800;
+  font-size: 18px;
+  cursor: pointer;
 }
 /*# sourceMappingURL=BurgerNavStyles.css.map */

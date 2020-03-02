@@ -75,7 +75,7 @@
         }
     }
 
-    &__loading {
+    &__loading, &__error {
         text-align: center;
         margin: 40vh 0;
         font-size: 30px;

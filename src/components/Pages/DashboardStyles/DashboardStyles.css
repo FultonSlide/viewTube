@@ -1,3 +1,25 @@
+@-webkit-keyframes spin {
+  from {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+
+@keyframes spin {
+  from {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+
 .Dashboard__search-options {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -15,8 +37,7 @@
 .Dashboard__loading {
   text-align: center;
   margin: 40vh 0;
-  font-size: 30px;
-  font-weight: bold;
+  width: 80px;
 }
 
 @media (max-width: 900px) {

@@ -12,7 +12,7 @@ const Header = (props) => {
                 <img src={ViewtubeLogo} alt="viewTube" className="Header__logo"/>
             </Link>
             <SearchBar search={props.search}/>
-            <Navbar/>
+            <Navbar handleTopVideosFetch={props.handleTopVideosFetch}/>
         </div>
     );
 };

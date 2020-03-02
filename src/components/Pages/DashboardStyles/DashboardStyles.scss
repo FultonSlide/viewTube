@@ -1,3 +1,10 @@
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    } to {
+        transform: rotate(360deg);
+    }
+}
 .Dashboard {
     &__search-options {
         display: flex;
@@ -9,11 +16,17 @@
         }
     }
 
+    // &__loading, &__error {
+    //     text-align: center;
+    //     margin: 40vh 0;
+    //     font-size: 30px;
+    //     font-weight: bold;
+    // }
+
     &__loading {
         text-align: center;
         margin: 40vh 0;
-        font-size: 30px;
-        font-weight: bold;
+        width: 80px;
     }
 
     @media (max-width: 900px){
