@@ -60,12 +60,14 @@ class Player extends Component {
             .then(data => {
                 if(data.error){
                     this.setState({
-                        error: true
+                        error: true,
+                        id: id
                     })
                 } else {
                     this.setState({
                         videoDetails: data.items[0],
-                        dataLoaded: true
+                        dataLoaded: true,
+                        id: id
                     });
                 }
             })
@@ -73,7 +75,8 @@ class Player extends Component {
                 this.setState({
                     dataLoaded: false,
                     error: true,
-                    errorMsg: 'Network error'
+                    errorMsg: 'Network error',
+                    id: id
                 });
             });
     }
@@ -131,8 +134,8 @@ class Player extends Component {
                         <h1>Related Videos</h1>
                         {this.state.relatedVideos.length > 0 ? <VideoCardList 
                             videoData={this.state.relatedVideos} 
-                            addToStorage={this.props.addToStorage} 
-                            removeFromStorage={this.props.removeFromStorage}
+                            addToStorage={this.context.addToStorage} 
+                            removeFromStorage={this.context.removeFromStorage}
                             handleRelatedVideoFetch={this.handleRelatedVideoFetch}
                             handleFetch={this.handleFetch}
                             decodeHTML={this.props.decodeHTML}
