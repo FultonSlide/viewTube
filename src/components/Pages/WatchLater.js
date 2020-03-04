@@ -11,7 +11,8 @@ class WatchLater extends Component {
     static contextType = StorageContext;
 
     componentDidMount() {
-        if(this.context.videoIds.length === 0){
+        if(this.context.videoIds.length === 0 || this.context.videoIds.length !== localStorage.length){
+            console.log(this.context.videoData);
             let query = '';
             this.context.getLocalStorage()
                 .then(() => {
@@ -19,7 +20,7 @@ class WatchLater extends Component {
                         query += `${this.context.videoIds[i]},`
                     }
                     if(query){
-                        this.context.handleVideoIdFetch(query, this.props.URI, this.props.apiKey);
+                        this.context.handleVideoIdFetch(query);
                     }
                 }).catch(err => console.log(err));
         }

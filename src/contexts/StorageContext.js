@@ -13,7 +13,7 @@ const StorageContextProvider = (props) => {
         return new Promise((resolve) => {
             let ids = [];
         
-            for(let i=localStorage.length-1; i >= 0; i--){
+            for(let i=0; i < localStorage.length; i++){
                 ids.push(localStorage.getItem(localStorage.key(i)));
             }
 
