@@ -106,6 +106,28 @@
   font-size: 1.2rem;
 }
 
+.Player__add {
+  position: relative;
+  -ms-grid-column: 3;
+      grid-column-start: 3;
+  grid-column-end: 4;
+  grid-column-start: 3;
+  grid-column-end: 4;
+  width: 40px;
+  height: 40px;
+  margin: auto;
+  cursor: pointer;
+  -webkit-transform: rotate(0deg);
+          transform: rotate(0deg);
+  -webkit-transition: all 1s;
+  transition: all 1s;
+}
+
+.Player__add--active {
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+}
+
 .Player__relatedVideos h1 {
   margin: 1rem 25px;
 }

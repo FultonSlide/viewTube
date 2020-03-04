@@ -77,6 +77,24 @@
         font-size: 1.2rem;
     }
 
+    &__add {
+        position: relative;
+        grid-column-start: 3;
+        grid-column-end: 4;
+        grid-column-start: 3;
+        grid-column-end: 4;
+        width: 40px;
+        height: 40px;
+        margin: auto;
+        cursor: pointer;
+        transform: rotate(0deg);
+        transition: all 1s;
+
+        &--active {
+            transform: rotate(45deg);
+        }
+    }
+
     &__relatedVideos {
         h1 {
             margin: 1rem 25px;

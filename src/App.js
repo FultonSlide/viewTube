@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import StorageContextProvider from './contexts/StorageContext';
 import Header from './components/Layout/Header';
 import MobileHeader from './components/Layout/MobileHeader';
 import Dashboard from './components/Pages/Dashboard';
@@ -19,7 +20,7 @@ import Spinner from './assets/svgs/Spinner.svg';
 
 class App extends Component {
   state = {
-    apiKey: 'AIzaSyDvSG4FMFNiVX--PnACyWktWVepiUzlIjc',
+    apiKey: 'AIzaSyC0EQvDgWmnQQbZS_E08Wkcg-E00f5hSeI',
     URI: 'https://www.googleapis.com/youtube/v3',
     title: '',
     countryCode: '',
@@ -36,21 +37,23 @@ class App extends Component {
   }
 
   componentDidMount() {
-    fetch('https://extreme-ip-lookup.com/json/')
-      .then( res => res.json())
-      .then(response => {
-        this.setState({
-          ...this.state,
-          countryCode: response.countryCode
-        });
-        this.handleTopVideosFetch();
-      })
-      .catch(err => {
-        this.setState({
-          ...this.state,
-          dataLoaded: false
-        });
-      });
+    // fetch('https://extreme-ip-lookup.com/json/')
+    //   .then( res => res.json())
+    //   .then(response => {
+    //     this.setState({
+    //       ...this.state,
+    //       countryCode: response.countryCode
+    //     });
+    //     this.handleTopVideosFetch();
+    //   })
+    //   .catch(err => {
+    //     this.setState({
+    //       ...this.state,
+    //       dataLoaded: false
+    //     });
+    //   });
+
+    this.handleTopVideosFetch();
   }
 
   handleTopVideosFetch = () => {
@@ -145,10 +148,14 @@ class App extends Component {
     }
   }
 
+
+  //StorageContext//
   addToStorage = (id) => {
     localStorage.setItem(id, id);
   }
 
+
+  //StorageContext//
   removeFromStorage = (id) => {
     for(let i=0; i < localStorage.length; i++){
       if(id === localStorage.getItem(localStorage.key(i)) || localStorage.getItem(localStorage.key(i)) == null){
@@ -176,49 +183,51 @@ class App extends Component {
     return (
       <BrowserRouter>
         <div className="App">
-          <Header search={this.search} handleTopVideosFetch={this.handleTopVideosFetch}/>
-          <MobileHeader handleTopVideosFetch={this.handleTopVideosFetch} search={this.search}/>
-          <Switch>
-            <Route exact path="/" render={(routeProps) => <Dashboard 
-              {...routeProps} 
-              apiKey={this.state.apiKey}
-              URI={this.state.URI}
-              videoData={this.state.videoData}
-              dataLoaded={this.state.dataLoaded}
-              title={this.state.title}
-              addToStorage={this.addToStorage}
-              removeFromStorage={this.removeFromStorage}
-              handleFetch={this.handleFetch}
-              handleFetchTopics={this.handleFetchTopics}
-              decodeHTML={this.decodeHTML}
-              error={this.state.error}
-              errorMsg={this.state.errorMsg}
-              spinner={Spinner}
-              handleChangePage={this.handleChangePage}
-              nextPageToken={this.state.nextPageToken}
-            />}></Route>
+          <StorageContextProvider apiKey={this.state.apiKey} URI={this.state.URI}>
+            <Header search={this.search} handleTopVideosFetch={this.handleTopVideosFetch}/>
+            <MobileHeader handleTopVideosFetch={this.handleTopVideosFetch} search={this.search}/>
+            <Switch>
+              <Route exact path="/" render={(routeProps) => <Dashboard 
+                {...routeProps} 
+                apiKey={this.state.apiKey}
+                URI={this.state.URI}
+                videoData={this.state.videoData}
+                dataLoaded={this.state.dataLoaded}
+                title={this.state.title}
+                addToStorage={this.addToStorage}
+                removeFromStorage={this.removeFromStorage}
+                handleFetch={this.handleFetch}
+                handleFetchTopics={this.handleFetchTopics}
+                decodeHTML={this.decodeHTML}
+                error={this.state.error}
+                errorMsg={this.state.errorMsg}
+                spinner={Spinner}
+                handleChangePage={this.handleChangePage}
+                nextPageToken={this.state.nextPageToken}
+              />}></Route>
 
-            <Route path='/watchlater' render={(routeProps) => <WatchLater
-              {...routeProps}
-              apiKey={this.state.apiKey}
-              URI={this.state.URI}
-              addToStorage={this.addToStorage}
-              removeFromStorage={this.removeFromStorage}
-              decodeHTML={this.decodeHTML}
-              spinner={Spinner}
-            />}></Route>
+              <Route path='/watchlater' render={(routeProps) => <WatchLater
+                {...routeProps}
+                apiKey={this.state.apiKey}
+                URI={this.state.URI}
+                addToStorage={this.addToStorage}
+                removeFromStorage={this.removeFromStorage}
+                decodeHTML={this.decodeHTML}
+                spinner={Spinner}
+              />}></Route>
 
-            <Route path='/player/:id' render={(routeProps) => <Player
-              {...routeProps} 
-              apiKey={this.state.apiKey}
-              URI={this.state.URI}
-              addToStorage={this.addToStorage}
-              removeFromStorage={this.removeFromStorage}
-              decodeHTML={this.decodeHTML}
-              error={this.state.errorMsg}
-              spinner={Spinner}
-            />}></Route>
-          </Switch>
+              <Route path='/player/:id' render={(routeProps) => <Player
+                {...routeProps} 
+                apiKey={this.state.apiKey}
+                URI={this.state.URI}
+                addToStorage={this.addToStorage}
+                removeFromStorage={this.removeFromStorage}
+                decodeHTML={this.decodeHTML}
+                error={this.state.errorMsg}
+                spinner={Spinner}
+              />}></Route>
+            </Switch>
+          </StorageContextProvider>
         </div>
       </BrowserRouter>
     )

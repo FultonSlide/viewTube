@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import moment from 'moment';
 import VideoCardList from '../Layout/VideoCardList';
+import Add from '../../assets/svgs/Add.svg';
 import './PlayerStyles/PlayerStyles.css';
 
 class Player extends Component {
@@ -8,6 +9,7 @@ class Player extends Component {
         dataLoaded: false,
         relatedDataLoaded: false,
         descActive: false,
+        inStorage: false, //StorageContext//
         videoDetails: [],
         relatedVideos: [],
         error: false,
@@ -85,6 +87,15 @@ class Player extends Component {
         })
     }
 
+    handleAddClick = () => {
+        console.log('handleAddClick to be added');
+    }
+
+    //StorageContext//
+    checkInStorage = () => {
+        console.log('CheckInStorage to be added');
+    }
+
     render () {
         let URL = 'https://www.youtube.com/embed/';
         let videoId = this.props.match.params.id;
@@ -100,7 +111,7 @@ class Player extends Component {
                         <p className={this.state.descActive ? "Player__desc Player__desc--active" : "Player__desc"} onClick={this.handleDescActive}>{this.state.videoDetails.snippet.description}</p>
                         <p className="Player__channelName">{this.state.videoDetails.snippet.channelTitle}</p>
                         <p className="Player__publishedAt">{ moment(this.state.videoDetails.snippet.publishedAt).fromNow() }</p>
-                        <p className="Player__add"></p>
+                        {this.state.inStorage ? <img src={Add} alt="add" className="Player__add Player__add--active" onClick={this.handleAddClick}/> : <img src={Add} alt="add" className="Player__add" onClick={this.handleAddClick}/>}
                     </div>
                     <div className="Player__relatedVideos">
                         <h1>Related Videos</h1>
