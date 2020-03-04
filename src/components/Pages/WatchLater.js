@@ -1,65 +1,62 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import VideoCardList from '../Layout/VideoCardList';
 import { StorageContext } from '../../contexts/StorageContext';
 import './WatchLaterStyles/WatchLaterStyles.css';
 
-class WatchLater extends Component {
-    state = {
-        errorMsg: 'Daily Youtube API video limit exceeded, check back again later!'
-    }
+const WatchLater = (props) => {
+    const { error, videoIds, videoData, getLocalStorage, handleVideoIdFetch, videoDataLoaded, addToStorage, removeFromStorage, updateList } = useContext(StorageContext);
+    const [ errorMsg ] = useState('Daily Youtube API video limit exceeded, check back again later!');
+    const [ storageLength ] = useState(localStorage.length);
 
-    static contextType = StorageContext;
-
-    componentDidMount() {
-        if(this.context.videoIds.length === 0 || this.context.videoIds.length !== localStorage.length){
-            console.log(this.context.videoData);
-            let query = '';
-            this.context.getLocalStorage()
+    useEffect(() => {
+        let query = '';
+            getLocalStorage()
                 .then(() => {
-                    for(let i=0; i < this.context.videoIds.length; i++){
-                        query += `${this.context.videoIds[i]},`
+                    for(let i=0; i < videoIds.length; i++){
+                        query += `${videoIds[i]},`
                     }
                     if(query){
-                        this.context.handleVideoIdFetch(query);
+                        handleVideoIdFetch(query);
                     }
                 }).catch(err => console.log(err));
-        }
-    }
+    }, [videoIds.length]);
 
-    render () {
+    const handleRender = () => {
         let render;
-        if(!this.context.error){
+        if(!error){
             if(localStorage.length !== 0){
-                if(this.context.videoDataLoaded){
+                if(videoDataLoaded){
                     render = <div className="WatchLater">
                             <div className="WatchLater__title">
                                 <h1>Watch Later Playlist</h1>
                             </div>
     
                             <div className="WatchLater__video-cards">
-                                {this.context.videoData.length > 0 ? <VideoCardList 
-                                    videoData={this.context.videoData} 
-                                    addToStorage={this.context.addToStorage} 
-                                    removeFromStorage={this.context.removeFromStorage}
-                                    decodeHTML={this.props.decodeHTML}
-                                    updateList={this.context.updateList}
+                                {videoData.length > 0 ? <VideoCardList 
+                                    videoData={videoData} 
+                                    addToStorage={addToStorage} 
+                                    removeFromStorage={removeFromStorage}
+                                    decodeHTML={props.decodeHTML}
+                                    updateList={updateList}
                                 /> : <div className="WatchLater__error">Error, oops something went wrong</div>}
                             </div>
                         </div>;
                 } else {
-                    render = <div className="WatchLater__loading"><img src={this.props.spinner} alt="loading" className="Player__spinner"/></div>;
+                    render = <div className="WatchLater__loading"><img src={props.spinner} alt="loading" className="Player__spinner"/></div>;
                 }
             } else {
                 render = <div className="WatchLater__noVideos">No videos in your playlist</div>;
             }
         } else {
-            render = <div className="WatchLater__error">{this.state.errorMsg}</div>;
+            render = <div className="WatchLater__error">{errorMsg}</div>;
         }
 
-        return (
-            <div>{render}</div>
-        )
+        return render;
     }
+
+    return (
+        <div>{handleRender()}</div>
+    )
 }
 
 export default WatchLater;

@@ -39,19 +39,8 @@ const StorageContextProvider = (props) => {
         let tempVideoIds = videoIds.filter((videoId) => {
             return id !== videoId;
         });
-
-        let query = '';
-        for(let i=0; i < tempVideoIds.length; i++){
-            query += `${tempVideoIds[i]},`
-        }
-
-        if(query){
-            handleVideoIdFetch(query);
-        }
         
         setVideoIds([...tempVideoIds]);
-
-
     }
 
     const handleVideoIdFetch = (id) => {
