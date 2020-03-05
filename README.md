@@ -1,3 +1,7 @@
+## viewTube
+
+A video player app built using React, Sass & Bem and utilizing Youtube restful API allows users to search youtube videos and curate a 'watch later' playlist of videos using local storage.
+
 ## Available Scripts
 
 In the project directory, you can run:
