@@ -7,16 +7,6 @@ import WatchLater from './components/Pages/WatchLater';
 import Player from './components/Pages/Player';
 import Spinner from './assets/svgs/Spinner.svg';
 
-//Key 1: AIzaSyAqSKoR84MGTlCJ_-YtywCQEucYj-747L4
-//Key 2: AIzaSyCnF4i9AoHmwEcLFkVXq95B16mv53kT5p4
-//Key 3: AIzaSyC0EQvDgWmnQQbZS_E08Wkcg-E00f5hSeI
-//key 4: AIzaSyA1EkBEFgV4LT9-ERNZpTp7yYEVYB3eyag
-//key 5: AIzaSyDILyPjlX9vs82_TWKWcVNlg991z5gWi7c
-//key 6: AIzaSyDvnl0fsPFpF4MWk2w6HFBrB6Be0hxRftc
-//key 7: AIzaSyA2r-OIc2CoViwUs08k_ZzGyhB0kQAazLM
-
-//key 8: AIzaSyDvSG4FMFNiVX--PnACyWktWVepiUzlIjc
-
 class App extends Component {
   state = {
     apiKey: 'AIzaSyDvSG4FMFNiVX--PnACyWktWVepiUzlIjc',
