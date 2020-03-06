@@ -98,7 +98,7 @@
         left: 0;
         background: rgba(0,0,0,0);
         cursor: pointer;
-        transition: all 1s;
+        transition: background 1s;
 
         &--active {
             z-index: 1;

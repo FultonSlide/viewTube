@@ -109,8 +109,8 @@
   left: 0;
   background: rgba(0, 0, 0, 0);
   cursor: pointer;
-  -webkit-transition: all 1s;
-  transition: all 1s;
+  -webkit-transition: background 1s;
+  transition: background 1s;
 }
 
 .BurgerNav__overlay--active {

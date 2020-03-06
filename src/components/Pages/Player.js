@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import moment from 'moment';
 import VideoCardList from '../Layout/VideoCardList';
+import Add from '../../assets/svgs/Add.svg';
+import { StorageContext} from '../../contexts/StorageContext';
 import './PlayerStyles/PlayerStyles.css';
 
 class Player extends Component {
@@ -8,18 +10,22 @@ class Player extends Component {
         dataLoaded: false,
         relatedDataLoaded: false,
         descActive: false,
+        inStorage: false,
         videoDetails: [],
         relatedVideos: [],
         error: false,
-        errorMsg: ''
+        errorMsg: '',
+        id: this.props.match.params.id
     }
 
+    static contextType = StorageContext;
+
     componentDidMount() {
-        this.handleFetch(this.props.match.params.id);
-        this.handleRelatedVideoFetch(this.props.match.params.id);
+        this.handleFetch(this.state.id);
+        this.handleRelatedVideoFetch(this.state.id);
         this.setState({
-            ...this.state,
-            errorMsg: this.props.error
+            errorMsg: this.props.error,
+            inStorage: this.checkInStorage(this.state.id)
         });
     }
 
@@ -29,12 +35,10 @@ class Player extends Component {
             .then(data => {
                 if(data.error){
                     this.setState({
-                        ...this.state,
                         error: true
                     })
                 } else {
                     this.setState({
-                        ...this.state,
                         relatedVideos: data.items,
                         relatedDataLoaded: true,
                         error: false
@@ -43,7 +47,6 @@ class Player extends Component {
             })
             .catch(err => {
                 this.setState({
-                    ...this.state,
                     relatedDataLoaded: false,
                     error: true,
                     errorMsg: 'Network error'
@@ -57,57 +60,82 @@ class Player extends Component {
             .then(data => {
                 if(data.error){
                     this.setState({
-                        ...this.state,
-                        error: true
+                        error: true,
+                        id: id
                     })
                 } else {
                     this.setState({
-                        ...this.state,
                         videoDetails: data.items[0],
-                        dataLoaded: true
+                        dataLoaded: true,
+                        id: id
                     });
                 }
             })
             .catch(err => {
                 this.setState({
-                    ...this.state,
                     dataLoaded: false,
                     error: true,
-                    errorMsg: 'Network error'
+                    errorMsg: 'Network error',
+                    id: id
                 });
             });
     }
 
     handleDescActive = () => {
         this.setState({
-            ...this.state,
             descActive: !this.state.descActive
         })
     }
 
+    handleAddClick = () => {
+        if(this.state.inStorage){
+            this.context.removeFromStorage(this.state.id);
+            this.setState({
+                inStorage: false
+            });
+            this.context.updateList(this.state.id);
+        } else {
+            this.context.addToStorage(this.state.id);
+            this.setState({
+                inStorage: true
+            });
+        }
+    }
+
+    checkInStorage = (videoId) => {
+        let inStorage = false; 
+        for(let i=0; i < localStorage.length; i++){
+            if(videoId === localStorage.getItem(localStorage.key(i))){
+                inStorage = true;
+                break;
+            }
+        }
+
+        return inStorage;
+    }
+
     render () {
         let URL = 'https://www.youtube.com/embed/';
-        let videoId = this.props.match.params.id;
         let render;
         if(!this.state.error){
             render = this.state.dataLoaded && this.state.relatedDataLoaded ? (
                 <div className="Player">
                     <div className="Player__video">
-                        <iframe src={URL + videoId + '?autoplay=1' } frameBorder="0" title="embed video" align="middle" allow="autoplay; encrypted-media" allowFullScreen></iframe>
+                        <iframe src={URL + this.state.id + '?autoplay=1' } frameBorder="0" title="embed video" align="middle" allow="autoplay; encrypted-media" allowFullScreen></iframe>
                     </div>
                     <div className="Player__details">
                         <h1 className="Player__title">{this.state.videoDetails.snippet.title}</h1>
                         <p className={this.state.descActive ? "Player__desc Player__desc--active" : "Player__desc"} onClick={this.handleDescActive}>{this.state.videoDetails.snippet.description}</p>
                         <p className="Player__channelName">{this.state.videoDetails.snippet.channelTitle}</p>
                         <p className="Player__publishedAt">{ moment(this.state.videoDetails.snippet.publishedAt).fromNow() }</p>
-                        <p className="Player__add"></p>
+                        {this.state.inStorage ? <img src={Add} alt="add" className="Player__add Player__add--active" onClick={this.handleAddClick}/> : <img src={Add} alt="add" className="Player__add" onClick={this.handleAddClick}/>}
                     </div>
                     <div className="Player__relatedVideos">
                         <h1>Related Videos</h1>
                         {this.state.relatedVideos.length > 0 ? <VideoCardList 
                             videoData={this.state.relatedVideos} 
-                            addToStorage={this.props.addToStorage} 
-                            removeFromStorage={this.props.removeFromStorage}
+                            addToStorage={this.context.addToStorage} 
+                            removeFromStorage={this.context.removeFromStorage}
                             handleRelatedVideoFetch={this.handleRelatedVideoFetch}
                             handleFetch={this.handleFetch}
                             decodeHTML={this.props.decodeHTML}

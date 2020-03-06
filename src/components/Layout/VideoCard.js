@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
 import Add from '../../assets/svgs/Add.svg';
+import { StorageContext } from '../../contexts/StorageContext';
 import './VideoCardStyles/VideoCardStyles.css';
 
 class VideoCard extends Component {
@@ -10,11 +11,13 @@ class VideoCard extends Component {
         id: this.props.videoData.id.videoId ? this.props.videoData.id.videoId : this.props.videoData.id
     }
 
+    static contextType = StorageContext;
+
     componentDidMount() {
         this.setState({
-            ...this.state,
             inStorage: this.checkInStorage(this.state.id)
         });
+
     }
 
     handleLinkClick = () => {
@@ -26,16 +29,14 @@ class VideoCard extends Component {
 
     handleClick = (e) => {
         if(this.state.inStorage){
-            this.props.removeFromStorage(this.state.id);
+            this.context.removeFromStorage(this.state.id);
             this.setState({
-                ...this.state,
                 inStorage: false
             });
-            this.props.updateList(this.state.id);
+            this.context.updateList(this.state.id);
         } else {
-            this.props.addToStorage(this.state.id);
+            this.context.addToStorage(this.state.id);
             this.setState({
-                ...this.state,
                 inStorage: true
             });
         }
