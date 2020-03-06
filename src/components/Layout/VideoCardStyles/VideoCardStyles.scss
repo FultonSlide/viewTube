@@ -101,4 +101,43 @@
             transform: rotate(45deg);
         }
     }
+
+    &__add:hover+.VideoCard__tooltip {
+        opacity: 1;
+        transform: translate(230px, 40px);
+    }
+
+    &__tooltip {
+        display: block;
+        opacity: 0;
+        position: absolute;
+        font-size: 12px;
+        font-weight: bold;
+        color: white;
+        padding: 5px 10px;
+        background-color: #DD0426;
+        border-radius: 25px;
+        transform: translate(230px, 50px);
+        z-index: 2;
+        transition: all 0.3s;
+
+        &:after {
+            z-index: -1;
+            position: absolute;
+            content: '';
+            height: 20px;
+            width: 20px;
+            border-radius: 3px;
+            display: block;
+            background-color: #DD0426;
+            bottom: 10px;
+            transform: rotate(45deg) translate(75px, -75px);
+        }
+    }
+
+    @media (max-width: 900px) {
+        &__tooltip {
+            display: none;
+        }
+    }
 }

@@ -120,4 +120,47 @@
   -webkit-transform: rotate(45deg);
           transform: rotate(45deg);
 }
+
+.VideoCard__add:hover + .VideoCard__tooltip {
+  opacity: 1;
+  -webkit-transform: translate(230px, 40px);
+          transform: translate(230px, 40px);
+}
+
+.VideoCard__tooltip {
+  display: block;
+  opacity: 0;
+  position: absolute;
+  font-size: 12px;
+  font-weight: bold;
+  color: white;
+  padding: 5px 10px;
+  background-color: #DD0426;
+  border-radius: 25px;
+  -webkit-transform: translate(230px, 50px);
+          transform: translate(230px, 50px);
+  z-index: 2;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+.VideoCard__tooltip:after {
+  z-index: -1;
+  position: absolute;
+  content: '';
+  height: 20px;
+  width: 20px;
+  border-radius: 3px;
+  display: block;
+  background-color: #DD0426;
+  bottom: 10px;
+  -webkit-transform: rotate(45deg) translate(75px, -75px);
+          transform: rotate(45deg) translate(75px, -75px);
+}
+
+@media (max-width: 900px) {
+  .VideoCard__tooltip {
+    display: none;
+  }
+}
 /*# sourceMappingURL=VideoCardStyles.css.map */

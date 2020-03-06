@@ -55,6 +55,7 @@ class VideoCard extends Component {
     }
 
     render () {
+        let tooltipText = this.state.inStorage ? 'Remove from Watch Later Playlist' : 'Add to Watch Later Playlist';
         return (
             <div className="VideoCard">
                 <Link to={'/player/' + this.state.id} className="VideoCard__content" onClick={this.handleLinkClick}>
@@ -65,6 +66,7 @@ class VideoCard extends Component {
                     <p className="VideoCard__channelTitle">{this.props.decodeHTML(this.props.videoData.snippet.channelTitle)}</p>
                     <p className="VideoCard__publishedAt">{ moment(this.props.videoData.snippet.publishedAt).fromNow() }</p>
                     {this.state.inStorage ? <img src={Add} alt="add" className="VideoCard__add VideoCard__add--active" onClick={this.handleClick}/> : <img src={Add} alt="add" className="VideoCard__add" onClick={this.handleClick}/>}
+                    <div className="VideoCard__tooltip">{tooltipText}</div>
                 </div>
             </div>
         )

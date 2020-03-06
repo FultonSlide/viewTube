@@ -10,7 +10,7 @@ import Spinner from './assets/svgs/Spinner.svg';
 
 class App extends Component {
   state = {
-    apiKey: 'AIzaSyC0EQvDgWmnQQbZS_E08Wkcg-E00f5hSeI',
+    apiKey: 'AIzaSyDvnl0fsPFpF4MWk2w6HFBrB6Be0hxRftc',
     URI: 'https://www.googleapis.com/youtube/v3',
     title: '',
     countryCode: '',
@@ -27,22 +27,6 @@ class App extends Component {
   }
 
   componentDidMount() {
-    // fetch('https://extreme-ip-lookup.com/json/')
-    //   .then( res => res.json())
-    //   .then(response => {
-    //     this.setState({
-    //       ...this.state,
-    //       countryCode: response.countryCode
-    //     });
-    //     this.handleTopVideosFetch();
-    //   })
-    //   .catch(err => {
-    //     this.setState({
-    //       ...this.state,
-    //       dataLoaded: false
-    //     });
-    //   });
-
     this.handleTopVideosFetch();
   }
 

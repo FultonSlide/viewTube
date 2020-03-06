@@ -116,6 +116,7 @@ class Player extends Component {
 
     render () {
         let URL = 'https://www.youtube.com/embed/';
+        let tooltipText = this.state.inStorage ? 'Remove from Watch Later Playlist' : 'Add to Watch Later Playlist';
         let render;
         if(!this.state.error){
             render = this.state.dataLoaded && this.state.relatedDataLoaded ? (
@@ -129,6 +130,7 @@ class Player extends Component {
                         <p className="Player__channelName">{this.state.videoDetails.snippet.channelTitle}</p>
                         <p className="Player__publishedAt">{ moment(this.state.videoDetails.snippet.publishedAt).fromNow() }</p>
                         {this.state.inStorage ? <img src={Add} alt="add" className="Player__add Player__add--active" onClick={this.handleAddClick}/> : <img src={Add} alt="add" className="Player__add" onClick={this.handleAddClick}/>}
+                        <div className="Player__tooltip">{tooltipText}</div>
                     </div>
                     <div className="Player__relatedVideos">
                         <h1>Related Videos</h1>
