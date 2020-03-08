@@ -10,7 +10,7 @@ import Spinner from './assets/svgs/Spinner.svg';
 
 class App extends Component {
   state = {
-    apiKey: 'AIzaSyDvnl0fsPFpF4MWk2w6HFBrB6Be0hxRftc',
+    apiKey: process.env.REACT_APP_API_KEY,
     URI: 'https://www.googleapis.com/youtube/v3',
     title: '',
     countryCode: '',
