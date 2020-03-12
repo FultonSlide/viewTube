@@ -1,70 +1,200 @@
 .LogoIconSVG {
+  cursor: pointer;
+}
+
+.LogoIconSVG__logo {
   max-width: 85px;
+  min-width: 70px;
   max-height: 85px;
+  min-height: 70px;
   width: 20vw;
-  height: 20vw;
+  height: 20vh;
 }
 
 @-webkit-keyframes blink-upperEyelid {
-  from {
+  0% {
     -webkit-transform: rotate(30deg);
             transform: rotate(30deg);
   }
-  to {
-    -webkit-transform: rotate(0deg);
-            transform: rotate(0deg);
+  50% {
+    -webkit-transform: rotate(0deg) translateY(-3px);
+            transform: rotate(0deg) translateY(-3px);
+  }
+  100% {
+    -webkit-transform: rotate(30deg);
+            transform: rotate(30deg);
   }
 }
 
 @keyframes blink-upperEyelid {
-  from {
+  0% {
     -webkit-transform: rotate(30deg);
             transform: rotate(30deg);
   }
-  to {
-    -webkit-transform: rotate(0deg);
-            transform: rotate(0deg);
+  50% {
+    -webkit-transform: rotate(0deg) translateY(-3px);
+            transform: rotate(0deg) translateY(-3px);
+  }
+  100% {
+    -webkit-transform: rotate(30deg);
+            transform: rotate(30deg);
   }
 }
 
 @-webkit-keyframes blink-lowerEyelid {
-  from {
+  0% {
     -webkit-transform: rotate(-30deg);
             transform: rotate(-30deg);
   }
-  to {
-    -webkit-transform: rotate(0deg);
-            transform: rotate(0deg);
+  50% {
+    -webkit-transform: rotate(0deg) translateY(3px);
+            transform: rotate(0deg) translateY(3px);
+  }
+  100% {
+    -webkit-transform: rotate(-30deg);
+            transform: rotate(-30deg);
   }
 }
 
 @keyframes blink-lowerEyelid {
-  from {
+  0% {
     -webkit-transform: rotate(-30deg);
             transform: rotate(-30deg);
   }
-  to {
-    -webkit-transform: rotate(0deg);
-            transform: rotate(0deg);
+  50% {
+    -webkit-transform: rotate(0deg) translateY(3px);
+            transform: rotate(0deg) translateY(3px);
+  }
+  100% {
+    -webkit-transform: rotate(-30deg);
+            transform: rotate(-30deg);
   }
 }
 
-@-webkit-keyframes close-eye {
-  from {
+@-webkit-keyframes roll-down {
+  0% {
+    -webkit-transform: rotate(65deg);
+            transform: rotate(65deg);
   }
-  to {
+  50% {
+    -webkit-transform: rotate(32.5deg);
+            transform: rotate(32.5deg);
+  }
+  100% {
+    -webkit-transform: rotate(65deg);
+            transform: rotate(65deg);
   }
 }
 
-@keyframes close-eye {
-  from {
+@keyframes roll-down {
+  0% {
+    -webkit-transform: rotate(65deg);
+            transform: rotate(65deg);
   }
-  to {
+  50% {
+    -webkit-transform: rotate(32.5deg);
+            transform: rotate(32.5deg);
+  }
+  100% {
+    -webkit-transform: rotate(65deg);
+            transform: rotate(65deg);
+  }
+}
+
+@-webkit-keyframes roll-up {
+  0% {
+    -webkit-transform: rotate(-65deg);
+            transform: rotate(-65deg);
+  }
+  50% {
+    -webkit-transform: rotate(-32.5deg);
+            transform: rotate(-32.5deg);
+  }
+  100% {
+    -webkit-transform: rotate(-65deg);
+            transform: rotate(-65deg);
+  }
+}
+
+@keyframes roll-up {
+  0% {
+    -webkit-transform: rotate(-65deg);
+            transform: rotate(-65deg);
+  }
+  50% {
+    -webkit-transform: rotate(-32.5deg);
+            transform: rotate(-32.5deg);
+  }
+  100% {
+    -webkit-transform: rotate(-65deg);
+            transform: rotate(-65deg);
   }
 }
 
 .LogoIconSVG #IconGroup {
   -webkit-transform: translateX(20px);
           transform: translateX(20px);
+}
+
+.LogoIconSVG .Upper-Eye {
+  -webkit-transform: rotate(65deg);
+          transform: rotate(65deg);
+  -webkit-transform-origin: right;
+          transform-origin: right;
+  transform-box: fill-box;
+}
+
+.LogoIconSVG .Upper-Eye--active {
+  -webkit-animation: roll-down 0.3s;
+          animation: roll-down 0.3s;
+}
+
+.LogoIconSVG .Lower-Eye {
+  -webkit-transform: rotate(-65deg);
+          transform: rotate(-65deg);
+  -webkit-transform-origin: right;
+          transform-origin: right;
+  transform-box: fill-box;
+}
+
+.LogoIconSVG .Lower-Eye--active {
+  -webkit-animation: roll-up 0.3s;
+          animation: roll-up 0.3s;
+}
+
+.LogoIconSVG #BlueEyelid-group {
+  -webkit-transform: translate(-20px, -50px);
+          transform: translate(-20px, -50px);
+}
+
+.LogoIconSVG #BlueEyelid-group .BlueEyelid {
+  -webkit-transform-origin: right;
+          transform-origin: right;
+  transform-box: fill-box;
+  -webkit-transform: rotate(-30deg);
+          transform: rotate(-30deg);
+}
+
+.LogoIconSVG #BlueEyelid-group .active {
+  -webkit-animation: blink-lowerEyelid 0.3s;
+          animation: blink-lowerEyelid 0.3s;
+}
+
+.LogoIconSVG #RedEyelid-group {
+  -webkit-transform: translate(-25px, 50px);
+          transform: translate(-25px, 50px);
+}
+
+.LogoIconSVG #RedEyelid-group .RedEyelid {
+  -webkit-transform-origin: right;
+          transform-origin: right;
+  transform-box: fill-box;
+  -webkit-transform: rotate(30deg);
+          transform: rotate(30deg);
+}
+
+.LogoIconSVG #RedEyelid-group .active {
+  -webkit-animation: blink-upperEyelid 0.3s;
+          animation: blink-upperEyelid 0.3s;
 }
 /*# sourceMappingURL=LogoIconSVGStyles.css.map */

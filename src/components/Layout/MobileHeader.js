@@ -10,9 +10,7 @@ const MobileHeader = (props) => {
     return (
         <div className="MobileHeader">
             <div className="MobileHeader__nav">
-                <Link to={'/'} className="MobileHeader__link" onClick={props.handleTopVideosFetch}>
-                    <LogoIconSVG className="MobileHeader__logo"/>
-                </Link>
+                <LogoIconSVG handleTopVideosFetch={props.handleTopVideosFetch}/>
                 <Link to={'/'} className="MobileHeader__link" onClick={props.handleTopVideosFetch}>
                     <img src={MobileViewtubeTitle} alt="viewTube" className="MobileHeader__title"/>
                 </Link>

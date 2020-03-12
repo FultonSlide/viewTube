@@ -1,31 +1,61 @@
 .LogoIconSVG {
-    max-width: 85px;
-    max-height: 85px;
+    cursor: pointer;
 
-    width: 20vw;
-    height: 20vw;
+    &__logo {
+        max-width: 85px;
+        min-width: 70px;
+        max-height: 85px;
+        min-height: 70px;
+
+        width: 20vw;
+        height: 20vh;
+    }
 
     @keyframes blink-upperEyelid {
-        from {
+        0% {
             transform: rotate(30deg);
-        } to {
-            transform: rotate(0deg);
+        } 
+        50%{
+            transform: rotate(0deg) translateY(-3px);
+        }
+        100% {
+            transform: rotate(30deg);
         }
     }
 
     @keyframes blink-lowerEyelid {
-        from {
+        0% {
             transform: rotate(-30deg);
-        } to {
-            transform: rotate(0deg);
+        } 
+        50% {
+            transform: rotate(0deg) translateY(3px);
+        }
+        100% {
+            transform: rotate(-30deg);
         }
     }
 
-    @keyframes close-eye {
-        from {
+    @keyframes roll-down {
+        0% {
+            transform: rotate(65deg);
+        } 
+        50% {
+            transform: rotate(32.5deg);
+        }
+        100% {
+            transform: rotate(65deg);
+        }
+    }
 
-        } to {
-
+    @keyframes roll-up {
+        0% {
+            transform: rotate(-65deg);
+        } 
+        50% {
+            transform: rotate(-32.5deg);
+        }
+        100% {
+            transform: rotate(-65deg);
         }
     }
 
@@ -33,23 +63,51 @@
         transform: translateX(20px);
     }
 
-    // #BlueEyelid-group {
-    //     transform: translate(-20px, -45px);
-        
-    //     #BlueEyelid {
-    //         animation: blink-lowerEyelid 2s infinite;
-    //         transform-origin: right;
-    //         transform-box: fill-box;
-    //     }
-    // }
-    
-    // #RedEyelid-group {
-    //     transform: translate(-25px, 45px);
+    .Upper-Eye {
+        transform: rotate(65deg);
+        transform-origin: right;
+        transform-box: fill-box;
 
-    //     #RedEyelid {
-    //         animation: blink-upperEyelid 2s infinite;
-    //         transform-origin: right;
-    //         transform-box: fill-box;
-    //     }
-    // }
+        &--active {
+            animation: roll-down 0.3s;
+        }
+    }
+
+    .Lower-Eye {
+        transform: rotate(-65deg);
+        transform-origin: right;
+        transform-box: fill-box;
+
+        &--active {
+            animation: roll-up 0.3s;
+        }
+    }
+
+    #BlueEyelid-group {
+        transform: translate(-20px, -50px);
+
+        .BlueEyelid {
+            transform-origin: right;
+            transform-box: fill-box;
+            transform: rotate(-30deg);
+        }
+
+        .active {
+            animation: blink-lowerEyelid 0.3s;
+        }
+    }
+        
+    #RedEyelid-group {
+        transform: translate(-25px, 50px);
+
+        .RedEyelid {
+            transform-origin: right;
+            transform-box: fill-box;
+            transform: rotate(30deg);
+        }
+
+        .active {
+            animation: blink-upperEyelid 0.3s;
+        }
+    }
 }
