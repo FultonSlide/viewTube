@@ -22,6 +22,7 @@ class App extends Component {
     videoData: [],
     nextPageToken: '',
     prevPageToken: '',
+    query: '',
     navDetail: '',
     navTo: '',
     error: false,
@@ -52,6 +53,7 @@ class App extends Component {
             videoData: data.items,
             nextPageToken: data.nextPageToken,
             prevPageToken: data.prevPageToken,
+            query: '',
             error: false
           });
         }
@@ -72,6 +74,7 @@ class App extends Component {
           dataLoaded: true,
           nextPageToken: data.nextPageToken,
           prevPageToken: data.prevPageToken,
+          query: q,
           videoData: data.items
         })
       })
@@ -87,7 +90,8 @@ class App extends Component {
       dataLoaded: false,
       videoData: []
     });
-    fetch(`${this.state.URI}/search?key=${this.state.apiKey}&part=snippet&type=video&maxResults=32&pageToken=${pageToken}`)
+    if(this.state.query) {
+      fetch(`${this.state.URI}/search?key=${this.state.apiKey}&part=snippet&type=video&maxResults=32&q=${this.state.query}&pageToken=${pageToken}`)
       .then(response => response.json())
       .then(data => {
         this.setState({
@@ -102,6 +106,23 @@ class App extends Component {
           dataLoaded: false
         });
       });
+    } else {
+      fetch(`${this.state.URI}/search?key=${this.state.apiKey}&part=snippet&type=video&maxResults=32&pageToken=${pageToken}`)
+      .then(response => response.json())
+      .then(data => {
+        this.setState({
+          dataLoaded: true,
+          nextPageToken: data.nextPageToken,
+          prevPageToken: data.prevPageToken,
+          videoData: data.items
+        })
+      })
+      .catch(err => {
+        this.setState({
+          dataLoaded: false
+        });
+      });
+    }
   }
 
   handleFetchTopics = (title) => {
