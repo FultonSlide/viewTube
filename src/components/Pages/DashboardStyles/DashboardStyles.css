@@ -52,12 +52,18 @@
   width: 80px;
 }
 
+.Dashboard__pageNav {
+  text-align: center;
+}
+
 .Dashboard__nextPage {
-  height: 30px;
-  width: 30px;
-  background-color: red;
-  margin: 2rem auto;
-  cursor: pointer;
+  display: inline-block;
+  margin: 1rem;
+}
+
+.Dashboard__prevPage {
+  display: inline-block;
+  margin: 1rem;
 }
 
 @media (max-width: 900px) {

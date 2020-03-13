@@ -12,6 +12,7 @@ class App extends Component {
   state = {
     apiKey: process.env.REACT_APP_API_KEY,
     URI: 'https://www.googleapis.com/youtube/v3',
+    initialLoad: true,
     title: '',
     countryCode: '',
     musicTopicID: 'music',
@@ -19,7 +20,8 @@ class App extends Component {
     sportsTopicID: 'sports',
     dataLoaded: false,
     videoData: [],
-    nextPageToken: '', 
+    nextPageToken: '',
+    prevPageToken: '',
     navDetail: '',
     navTo: '',
     error: false,
@@ -27,7 +29,12 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.handleTopVideosFetch();
+		if(this.state.initialLoad){
+      this.handleTopVideosFetch();
+      this.setState({
+        initialLoad: false
+      });
+		}
   }
 
   handleTopVideosFetch = () => {
@@ -36,23 +43,21 @@ class App extends Component {
       .then(data => {
         if(data.error){
           this.setState({
-            ...this.state,
             error: true
           })
         } else {
           this.setState({
-            ...this.state,
             title: 'Popular Videos',
             dataLoaded: true,
             videoData: data.items,
             nextPageToken: data.nextPageToken,
+            prevPageToken: data.prevPageToken,
             error: false
           });
         }
       })
       .catch(err => {
         this.setState({
-          ...this.state,
           dataLoaded: false
         });
       });
@@ -63,15 +68,15 @@ class App extends Component {
       .then(response => response.json())
       .then(data => {
         this.setState({
-          ...this.state,
           title,
           dataLoaded: true,
+          nextPageToken: data.nextPageToken,
+          prevPageToken: data.prevPageToken,
           videoData: data.items
         })
       })
       .catch(err => {
         this.setState({
-          ...this.state,
           dataLoaded: false
         });
       });
@@ -79,7 +84,6 @@ class App extends Component {
 
   handleChangePage = (pageToken) => {
     this.setState({
-      ...this.state,
       dataLoaded: false,
       videoData: []
     });
@@ -87,14 +91,14 @@ class App extends Component {
       .then(response => response.json())
       .then(data => {
         this.setState({
-          ...this.state,
           dataLoaded: true,
+          nextPageToken: data.nextPageToken,
+          prevPageToken: data.prevPageToken,
           videoData: data.items
         })
       })
       .catch(err => {
         this.setState({
-          ...this.state,
           dataLoaded: false
         });
       });
@@ -102,7 +106,6 @@ class App extends Component {
 
   handleFetchTopics = (title) => {
     this.setState({
-      ...this.state,
       dataLoaded: false,
       videoData: []
     });
@@ -140,7 +143,6 @@ class App extends Component {
 
   search = (query) => {
     this.setState({
-      ...this.state,
       dataLoaded: false,
       videoData: []
     });
@@ -178,6 +180,7 @@ class App extends Component {
                 spinner={Spinner}
                 handleChangePage={this.handleChangePage}
                 nextPageToken={this.state.nextPageToken}
+                prevPageToken={this.state.prevPageToken}
               />}></Route>
 
               <Route path='/watchlater' render={(routeProps) => <WatchLater

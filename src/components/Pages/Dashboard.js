@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import VideoCardList from '../Layout/VideoCardList';
 import SearchOptions from '../Atoms/SearchOptions';
+import Button from '../Atoms/Button';
 import './DashboardStyles/DashboardStyles.css';
 
 class Dashboard extends Component {
@@ -9,6 +10,7 @@ class Dashboard extends Component {
         dataLoaded: false,
         videoData: [],
         nextPageToken: '',
+        prevPageToken: '',
         error: false,
         errorMsg: ''
     }
@@ -17,6 +19,8 @@ class Dashboard extends Component {
         this.setState({
             dataLoaded: this.props.dataLoaded,
             videoData: this.props.videoData,
+            nextPageToken: this.props.nextPageToken,
+            prevPageToken: this.props.prevPageToken,
             error: this.props.error,
             errorMsg: this.props.errorMsg
         })
@@ -28,13 +32,18 @@ class Dashboard extends Component {
             dataLoaded: nextProps.dataLoaded,
             videoData: nextProps.videoData,
             nextPageToken: nextProps.nextPageToken,
+            prevPageToken: nextProps.prevPageToken,
             error: nextProps.error,
             errorMsg: nextProps.errorMsg
         })
     }
 
-    handlePageNav = () => {
+    handleNextPageNav = () => {
         this.props.handleChangePage(this.state.nextPageToken);
+    }
+
+    handlePrevPageNav = () => {
+        this.props.handleChangePage(this.state.prevPageToken);
     }
 
     render () {
@@ -54,8 +63,16 @@ class Dashboard extends Component {
                             decodeHTML={this.props.decodeHTML}
                         /> : <div className="Dashboard__error">No Videos Found</div>}
                     </div>
-                    {/* <div className="Dashboard__nextPage" onClick={this.handlePageNav}></div>
-                    <div className="Dashboard__prevPage"></div> */}
+                    <div className="Dashboard__pageNav">
+                        {this.state.prevPageToken ? (
+                            <div className="Dashboard__prevPage" onClick={this.handlePrevPageNav}>
+                                <Button buttonName="Prev Page"></Button>
+                            </div>
+                        ) : (null)}
+                        <div className="Dashboard__nextPage" onClick={this.handleNextPageNav}>
+                            <Button buttonName="Next Page"></Button>
+                        </div>
+                    </div>
                 </div>
             ): (
                 <div className="Dashboard__loading"><img src={this.props.spinner} alt="loading" className="Dashboard__spinner"/></div>
